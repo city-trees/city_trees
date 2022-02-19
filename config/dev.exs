@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :city_trees, CityTrees.Repo,
-  username: "postgres",
+  username: "city_trees_dev",
   password: "postgres",
   hostname: "localhost",
   database: "city_trees_dev",
