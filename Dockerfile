@@ -16,7 +16,7 @@ COPY config config
 
 # Install deps
 COPY mix.exs mix.exs
-copy mix.lock mix.lock
+COPY mix.lock mix.lock
 
 RUN mix deps.get --only prod
 
@@ -26,11 +26,15 @@ RUN mix deps.compile
 # Compile static assets
 RUN cd apps/city_trees_web && mix assets.deploy && cd ../..
 
+# Copy release configuration
+COPY rel rel
+
 # Compile projects
 RUN mix compile
 
 # Create Release
 RUN mix release
+
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
@@ -43,5 +47,6 @@ RUN chown nobody /app
 COPY --from=builder --chown=nobody:root /app/_build/prod/rel/server ./
 
 USER nobody
+EXPOSE 4000
 
 CMD /app/bin/server start

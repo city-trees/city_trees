@@ -27,6 +27,12 @@ SHELL ["/bin/bash", "-c"]
 ENV KERL_CONFIGURE_OPTIONS="--without-javac --without-wx"
 ENV KERL_BUILD_DOCS="no"
 
+# Setup locales to ensure that elixir to notuse latin-1
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+
 RUN . $HOME/.asdf/asdf.sh \
   && asdf plugin add erlang \
   && asdf install erlang 24.2.1 \
@@ -42,11 +48,6 @@ RUN . $HOME/.asdf/asdf.sh \
   && asdf install nodejs 16.14.0 \
   && asdf global nodejs 16.14.0
 
-# Setup locales to ensure that elixir to notuse latin-1
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
 # Install hex + rebar
 RUN mix local.hex --force && mix local.rebar --force

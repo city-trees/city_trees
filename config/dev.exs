@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :city_trees, CityTrees.Repo,
   username: "city_trees_dev",
-  password: "postgres",
+  password: "city_trees_dev",
   hostname: "localhost",
   database: "city_trees_dev",
   show_sensitive_data_on_connection_error: true,

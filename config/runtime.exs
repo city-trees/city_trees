@@ -29,6 +29,4 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base,
     server: true
-
-  # config :city_trees_web, HelloWeb.Endpoint, server: true
 end
