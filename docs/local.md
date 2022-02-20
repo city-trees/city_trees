@@ -92,9 +92,29 @@ create user city_trees_dev with encrypted password 'city_trees_dev';
 grant all privileges on database city_trees_dev to city_trees_dev;
 ```
 
+## Install fly.io
+
+```bash
+curl -L https://fly.io/install.sh | sh
+```
+
+Add to your .bashrc
+
+```bash
+export FLYCTL_INSTALL="$HOME/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+```
+
+Login to fly.io
+```bash
+flyctl auth login
+```
+
 ## Install vscode plugins
 
 - [Elixr LS](https://marketplace.visualstudio.com/items?itemName=JakeBecker.elixir-ls)
 - [Credo](https://marketplace.visualstudio.com/items?itemName=pantajoe.vscode-elixir-credo) 
 - [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [SpellCheck](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+- [Phenix](https://marketplace.visualstudio.com/items?itemName=phoenixframework.phoenix)
+- [TOML](https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml)
