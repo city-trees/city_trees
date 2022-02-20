@@ -1,0 +1,52 @@
+#cloud-config
+users:
+  - name: devops
+    groups: users, admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    passwd: $6$rounds=4096$0IRDjY8kAY8Ovx.9$E6lWYKLZwNedghkB6nP3MVw7FOCAZRshXri8K6az80MXzEh8/hCOKx5Cfwcviq.XPtXxfmRebebHOoRedRksd1
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpoAUd/eH0XumiT7KlVObP3NdA0knxaw/nSOKIWA+LP raziel@chieftec-lin
+package_update: true
+package_upgrade: true
+  - ufw
+runcmd:
+  # Enable firewall
+  - ufw enable
+
+  # @see https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-20-04
+  # @see https://kennethghartman.com/change-config-settings-using-a-bash-script/
+  - cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+  # Chnage ssh port to 2211
+  - sed -i 's/#\?\(Port\s*\).*$/\1 2211/' /etc/ssh/sshd_config
+  - ufw allow 2211/tcp comment 'Open port ssh tcp port 2211'
+  # Disable root login over ssh
+  - sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Enable public key auth
+  - sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' /etc/ssh/sshd_config
+  # Disable empty passwords
+  - sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable password base auth 
+  - sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Set max retries to 2
+  - sed -i 's/#\?\(MaxAuthTries\s*\).*$/\1 3/' /etc/ssh/sshd_config
+  # Disable x11Forwarding
+  - sed -i 's/#\?\(X11Forwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Do not show info about last login
+  - sed -i 's/#\?\(PrintLastLog\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable tunel
+  - sed -i 's/#\?\(PermitTunnel\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable agent fowards
+  - sed -i 's/#\?\(AllowAgentForwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable tcp fowards
+  - sed -i 's/#\?\(AllowTcpForwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable ChallengeResponseAuthentication
+  - sed -i 's/#\?\(ChallengeResponseAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable KerberosAuthentication
+  - sed -i 's/#\?\(KerberosAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Disable GSSAPIAuthentication
+  - sed -i 's/#\?\(GSSAPIAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
+  # Only allow devops user
+  - sed -i '$a AllowUsers devops' /etc/ssh/sshd_config
+  - systemctl reload sshd.service
+  - reboot
