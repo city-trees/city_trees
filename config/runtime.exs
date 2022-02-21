@@ -13,16 +13,12 @@ if config_env() == :prod do
   # Secret is generatedwith mix phx.gen.secret, stored in fly.io secrets.
   secret_key_base = System.get_env("SECRET_KEY_BASE") || raise "SECRET_KEY_BASE not avalibe"
 
-  # App name is based on fly.io app name
-  app_name = System.get_env("FLY_APP_NAME") || raise "FLY_APP_NAME not available"
-
   config :city_trees, CityTrees.Repo,
     url: database_url,
     socket_options: [:inet6],
     pool_size: 10
 
   config :city_trees_web, CityTreesWeb.Endpoint,
-    url: [host: "#{app_name}.fly.dev", port: 80],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: String.to_integer(System.get_env("PORT") || "4000")

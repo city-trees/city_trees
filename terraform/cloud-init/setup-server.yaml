@@ -10,6 +10,7 @@ users:
 package_update: true
 package_upgrade: true
   - ufw
+  - unzip
 runcmd:
   # Enable firewall
   - ufw enable

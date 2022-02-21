@@ -21,12 +21,46 @@ data "template_file" "user_data" {
   template = file("./cloud-init/setup-server.yaml")
 }
 
+resource "hcloud_firewall" "server_firewall" {
+  name = "server_firewall"
+  rule {
+    direction = "in"
+    protocol  = "icmp"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+
+  rule {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "2211"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+  rule {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "4000"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+}
+
 resource "hcloud_server" "server" {
   name        = "server1"
   server_type = "cpx11"
   image       = "ubuntu-20.04"
   location    = "nbg1"
   ssh_keys    = keys(var.ssh_keys)
+  firewall_ids = [
+    hcloud_firewall.server_firewall.id
+  ]
   user_data   = data.template_file.user_data.rendered
   network {
     network_id = hcloud_network.network.id

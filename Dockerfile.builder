@@ -3,6 +3,7 @@ FROM ubuntu:focal
 RUN apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install -y \ 
+      zip \
       build-essential \
       git \
       curl \ 
@@ -53,4 +54,6 @@ RUN . $HOME/.asdf/asdf.sh \
 # Install hex + rebar
 RUN mix local.hex --force && mix local.rebar --force
 
+
 CMD ["bash"]
+

@@ -12,7 +12,7 @@ mix deps.compile
 cd apps/city_trees_web && mix assets.deploy && cd ../..
 
 # Copy release configuration
-COPY rel rel
+cp -r rel rel
 
 # Compile projects
 mix compile
@@ -20,4 +20,7 @@ mix compile
 # Create Release
 mix release
 
-scp -r -i ./terraform/.ssh/deploy -P 2211 ./_build/ devops@49.12.207.142:/build
+rm -rf city_trees_web.zip
+zip -r city_trees_web.zip ./_build
+
+scp -r -i ./terraform/.ssh/deploy -P 2211 city_trees_web.zip devops@49.12.207.142:/
