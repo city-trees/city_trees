@@ -14,6 +14,7 @@ runcmd:
   # Enable firewall
   - ufw enable
 
+  # ssh hardening
   # @see https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-20-04
   # @see https://kennethghartman.com/change-config-settings-using-a-bash-script/
   - cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
@@ -49,4 +50,6 @@ runcmd:
   # Only allow devops user
   - sed -i '$a AllowUsers devops' /etc/ssh/sshd_config
   - systemctl reload sshd.service
+
+  # Additional reboot to ensure that all is updated
   - reboot

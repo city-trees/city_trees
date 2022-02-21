@@ -1,6 +1,7 @@
-FROM ubuntu:jammy
+FROM ubuntu:focal
 
 RUN apt-get update -y \
+  && apt-get upgrade -y \
   && apt-get install -y \ 
     libstdc++6 \
     openssl\

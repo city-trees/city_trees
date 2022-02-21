@@ -18,7 +18,7 @@ resource "hcloud_network_subnet" "network-subnet" {
 }
 
 data "template_file" "user_data" {
-  template = file("./scripts/setup-server-users.yaml")
+  template = file("./cloud-init/setup-server.yaml")
 }
 
 resource "hcloud_server" "server" {
