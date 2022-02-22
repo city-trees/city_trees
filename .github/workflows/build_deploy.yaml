@@ -1,0 +1,16 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    container: city_trees_buildpack:latest
+
+    steps:
+    - uses: actions/checkout@v2
+  
+    - name: Mix install 
+      run: mix deps.get
+
+    - name: Compile Deps 
+      run: mix deps.compile
