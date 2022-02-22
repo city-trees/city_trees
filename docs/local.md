@@ -49,10 +49,10 @@ sudo apt-get install inotify-tools
 ```bash
 export KERL_CONFIGURE_OPTIONS="--without-javac --without-wx"
 
-asdf install erlang latest
+asdf install erlang 24.2.1
 asdf global erlang 24.2.1
 
-asdf install elixir latest
+asdf install elixir 1.13.3-otp-24
 asdf global elixir 1.13.3-otp-24
 
 asdf install nodejs 16.14.0
@@ -65,6 +65,8 @@ asdf install
 ```
 
 ### Verify instalation by running:
+
+Before verification, open new shell to source asdf.
 
 ```bash
 node --version
