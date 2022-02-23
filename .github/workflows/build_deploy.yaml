@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/city_trees_buildpack:latest
+    container: ghcr.io/chyzwar/city_trees_buildpack:latest
 
     steps:
     - uses: actions/checkout@v2
