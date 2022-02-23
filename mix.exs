@@ -8,7 +8,7 @@ defmodule CityTrees.Umbrella.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
-      build_path: "build",
+      # build_path: "build",
       releases: [
         server: [
           applications: [

@@ -11,9 +11,6 @@ mix deps.compile
 # Compile static assets
 cd apps/city_trees_web && mix assets.deploy && cd ../..
 
-# Copy release configuration
-cp -r rel rel
-
 # Compile projects
 mix compile
 
@@ -23,4 +20,4 @@ mix release
 rm -rf city_trees_web.zip
 zip -r city_trees_web.zip ./_build
 
-scp -r -i ./terraform/.ssh/deploy -P 2211 city_trees_web.zip devops@49.12.207.142:/
+scp -r -i ./terraform/.ssh/deploy -P 2211 city_trees_web.zip devops@49.12.207.142:/home/devops/
