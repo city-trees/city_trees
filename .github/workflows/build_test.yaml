@@ -1,14 +1,10 @@
-name: Build and Deploy Prod
+name: Build and test
 
 on: 
   push: 
     branches:
       - master
-
-env:
-  MIX_ENV: prod
-  NODE_ENV: production
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
