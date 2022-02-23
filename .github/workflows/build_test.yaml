@@ -2,8 +2,11 @@ name: Build and test
 
 on: 
   push: 
-    branches:
-      - master
+    branches:    
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
+      - '!master'   # excludes master
 
 jobs:
   build:
@@ -14,9 +17,9 @@ jobs:
     - uses: actions/checkout@v2
   
     - name: Mix install
-      shell: bash 
+      shell: bash -l {0} 
       run: mix deps.get
 
     - name: Compile Deps
-      shell: bash
+      shell: bash -l {0}
       run: mix deps.compile
