@@ -12,15 +12,15 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/chyzwar/city_trees_buildpack:latest
+    container: ghcr.io/chyzwar/city_trees_buildpack:1.0.6
     
     steps:
     - uses: actions/checkout@v3
   
     - name: Mix install
-      shell: bash -i {0}
+      shell: bash -l {0}
       run: mix deps.get
 
     - name: Compile Deps
-      shell: bash -i {0}
+      shell: bash -l {0}
       run: mix deps.compile
