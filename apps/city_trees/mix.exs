@@ -40,7 +40,7 @@ defmodule CityTrees.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.3"},
-      {:swoosh, "~> 1.3"}
+      {:swoosh, "~> 1.6"}
     ]
   end
 
