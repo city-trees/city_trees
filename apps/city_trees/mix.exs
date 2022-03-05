@@ -38,7 +38,7 @@ defmodule CityTrees.MixProject do
     [
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.6"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, ">= 0.16.2"},
       {:jason, "~> 1.3"},
       {:swoosh, "~> 1.6"}
     ]
