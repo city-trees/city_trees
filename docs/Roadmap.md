@@ -14,15 +14,15 @@
 
     - create job advertisements 
     - create requirement process (hackerrank)
-    - advertise jobs (politechnika wrocławska/ uniwersytet w)
+    - advertise jobs (politechnika wrocławska/ uniwersytet w bydgoszczy)
     - define training/progression paths
     - start requirement 
     
   Product
     
     - get good enough understanding of problem domain
-    - create pitch (1 pager)
-    - design sprint
+    - napisanie one pager/pitch
+    - design sprint (persona[1]/product roadmap/mockups)
     - analiza konkurecji na rynku
     - poszukiwanie róznych programów/grantów europejskich
 
@@ -39,3 +39,7 @@
   - podstawowa tabela pokazująca dane na mapie
   - rózne kolory dla róznych typów (drzewa/trawnik)
   - wprowadznie nowych rekrutów
+
+
+
+[1] https://thestory.is/pl/proces/faza-strategii/persona/

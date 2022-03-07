@@ -77,7 +77,13 @@ pg_ctl --version
 
 ## Setup PostgresSQL
 
-When postgress is installed via asdf, database would run under current user
+When postgres is installed via asdf, database would run under current user
+
+### Start postgres server
+
+```
+~/.asdf/installs/postgres/14.2/bin/pg_ctl -D ~/.asdf/installs/postgres/14.2/data -l pg.log start
+```
 
 ### Create database for local dev
 
