@@ -40,7 +40,7 @@ defmodule CityTreesWeb.MixProject do
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.2"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_reload, "~> 1.3", only: :dev},
       {:phoenix_live_view, "~> 0.17.7"},
       {:floki, ">= 0.32.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.6"},
