@@ -15,13 +15,15 @@ runcmd:
   # Enable firewall
   - ufw enable
 
+  - ufw allow 2211/tcp comment 'Open port ssh tcp port 2211'
+  - ufw allow 2096/tcp comment 'Open port app tcp port 2096'
+
   # ssh hardening
   # @see https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-20-04
   # @see https://kennethghartman.com/change-config-settings-using-a-bash-script/
   - cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
   # Chnage ssh port to 2211
   - sed -i 's/#\?\(Port\s*\).*$/\1 2211/' /etc/ssh/sshd_config
-  - ufw allow 2211/tcp comment 'Open port ssh tcp port 2211'
   # Disable root login over ssh
   - sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 no/' /etc/ssh/sshd_config
   # Enable public key auth
@@ -36,11 +38,11 @@ runcmd:
   - sed -i 's/#\?\(X11Forwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
   # Do not show info about last login
   - sed -i 's/#\?\(PrintLastLog\s*\).*$/\1 no/' /etc/ssh/sshd_config
-  # Disable tunel
+  # Disable tunnel
   - sed -i 's/#\?\(PermitTunnel\s*\).*$/\1 no/' /etc/ssh/sshd_config
-  # Disable agent fowards
+  # Disable agent forwards
   - sed -i 's/#\?\(AllowAgentForwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
-  # Disable tcp fowards
+  # Disable tcp forwards
   - sed -i 's/#\?\(AllowTcpForwarding\s*\).*$/\1 no/' /etc/ssh/sshd_config
   # Disable ChallengeResponseAuthentication
   - sed -i 's/#\?\(ChallengeResponseAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config

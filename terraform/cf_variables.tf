@@ -10,12 +10,10 @@ variable "cloudflare_api_key" {
   sensitive   = true
   nullable    = true
 }
-variable "hcloud_token" {
-  description = "API Key access of hetzer account"
-  type        = string
-  sensitive   = true
-  nullable    = false
+variable "city_trees_domain" {
+  default = "city-trees.io"
 }
-variable "ssh_keys" {
-  description = "Map of SSH keys allowed to log in to server. Key is the name of user, value is the SSH public key"
+variable "town_trees_domain" {
+  default = "town-trees.com"
 }
+

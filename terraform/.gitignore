@@ -1,5 +1,7 @@
 .ssh
 
-# Terraform
+# providers
 .terraform
-variables.tfvars
+
+# vars
+*.tfvars

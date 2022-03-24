@@ -31,7 +31,6 @@ resource "hcloud_firewall" "server_firewall" {
       "::/0"
     ]
   }
-
   rule {
     direction = "in"
     protocol  = "tcp"
@@ -48,11 +47,11 @@ resource "hcloud_firewall" "server_firewall" {
     source_ips = [
       "0.0.0.0/0",
       "::/0"
-    ]
+    ] 
   }
 }
 
-resource "hcloud_server" "server" {
+resource "hcloud_server" "city_trees_dev" {
   name        = "server1"
   server_type = "cpx11"
   image       = "ubuntu-20.04"
@@ -65,6 +64,26 @@ resource "hcloud_server" "server" {
   network {
     network_id = hcloud_network.network.id
     ip         = "10.0.1.5"
+  }
+  
+  depends_on = [
+    hcloud_network_subnet.network-subnet
+  ]
+}
+
+resource "hcloud_server" "city_trees_prod" {
+  name        = "server1"
+  server_type = "cpx11"
+  image       = "ubuntu-20.04"
+  location    = "nbg1"
+  ssh_keys    = keys(var.ssh_keys)
+  firewall_ids = [
+    hcloud_firewall.server_firewall.id
+  ]
+  user_data   = data.template_file.user_data.rendered
+  network {
+    network_id = hcloud_network.network.id
+    ip         = "10.0.1.6"
   }
   
   depends_on = [
