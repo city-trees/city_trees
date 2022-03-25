@@ -1,4 +1,4 @@
-name: Build and Deploy Prod
+name: Build and Deploy to Dev
 
 on: 
   push: 
@@ -19,8 +19,17 @@ jobs:
     
     - name: Mix install
       shell: bash -l {0}
-      run: mix deps.get
+      run: mix deps.get --only prod
 
     - name: Compile Deps
       shell: bash -l {0}
       run: mix deps.compile
+
+    - name: Build static assets
+      shell: bash -l {0}
+      working-directory: ./apps/city_trees_web
+      run: mix assets.deploy
+
+    - name: Build Release
+      shell: bash -l {0}
+      run: mix release

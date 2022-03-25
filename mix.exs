@@ -52,7 +52,7 @@ defmodule CityTrees.Umbrella.MixProject do
     [
       # run `mix setup` in all child apps
       setup: ["cmd mix setup"],
-      web: ["cmd --app city_trees_web mix run assets.deploy"]
+      web: ["cmd mix assets.deploy"]
     ]
   end
 end
