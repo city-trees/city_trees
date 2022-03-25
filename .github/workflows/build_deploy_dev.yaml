@@ -9,6 +9,12 @@ env:
   MIX_ENV: prod
   NODE_ENV: production
 
+  SERVER_IP: 49.12.207.142
+  SERVER_PORT: 2211
+  SERVER_USER: devops
+  BUILD_DIR: .build
+  REMOTE_DIR: /home/devops
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,3 +39,19 @@ jobs:
     - name: Build Release
       shell: bash -l {0}
       run: mix release
+
+
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2.3.1
+      with:
+        key: ${{ secrets.SSH_KEY_DEV }} 
+
+    - name: Push new release to server
+      shell: bash -l {0}
+      run: |
+        rsync -avzr \ 
+          --progress \
+          --delete \
+          --port=$SERVER_PORT $BUILD_DIR $SERVER_IP:$SERVER_USER:$REMOTE_DIR
+
+          
