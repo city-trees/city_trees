@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/city_trees/city_trees_buildpack:latest
+    container: ghcr.io/city-trees/city_trees_buildpack:latest
 
     steps:
     - uses: actions/checkout@v3
