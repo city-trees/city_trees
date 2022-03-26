@@ -46,16 +46,17 @@ jobs:
             Port ${{ env.SERVER_PORT }}
             User ${{ env.SERVER_USER }}
 
-    - name: Set today date as env variable
-      run: echo "TODAY_DATE::$(date --rfc-3339=date)" >> $GITHUB_ENV
+    - name: Set build path
+      run: echo "BUILD_PATH=$(date --rfc-3339=date)_$GITHUB_SHA" >> $GITHUB_ENV
+
+    - name: Create destination (mkpath rsync)
+      run: ssh $SERVER_USER@server mkdir -p $REMOTE_DIR/city_trees/${BUILD_PATH}
 
     - name: Upload new release to server
       shell: bash -l {0}
       run: >-
         rsync 
-        -avzr
-        --progress
+        -azr
         --delete
-        --relative /city_trees/${TODAY_DATE}_${GITHUB_SHA}
-        $BUILD_DIR $SERVER_USER@server:$REMOTE_DIR
+        $BUILD_DIR $SERVER_USER@server:$REMOTE_DIR/city_trees/${BUILD_PATH}/
 
