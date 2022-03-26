@@ -35,6 +35,23 @@ jobs:
       shell: bash -l {0}
       run: mix release
 
-    - name: Push new release to server
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2.3.1
+      with:
+        key: ${{ secrets.SSH_KEY_PROD }} 
+        known_hosts: ${{ secrets.SSH_KNOW_HOSTS_PROD }}   
+        config: |
+          Host server
+            HostName ${{ env.SERVER_IP }}
+            Port ${{ env.SERVER_PORT }}
+            User ${{ env.SERVER_USER }}
+
+
+    - name: Upload new release to server
       shell: bash -l {0}
-      run: mix release
+      run: >-
+        rsync 
+        -avzr
+        --progress
+        --delete
+        $BUILD_DIR $SERVER_USER@server:$REMOTE_DIR
