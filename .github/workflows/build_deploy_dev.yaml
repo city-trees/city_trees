@@ -75,5 +75,5 @@ jobs:
         "
 
     - name: Restart service
-      run: ssh $SERVER_USER@server sudo systemctl restart city-tress.service
+      run: ssh $SERVER_USER@server sudo systemctl restart city-trees.service
 
