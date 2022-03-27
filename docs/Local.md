@@ -26,6 +26,7 @@ asdf plugin add erlang
 asdf plugin add elixir
 asdf plugin add nodejs
 asdf plugin-add postgres
+asdf plugin-add terraform
 ```
 
 ### Add asdf to .bashrc
@@ -60,6 +61,9 @@ asdf global nodejs 16.14.0
 
 asdf install postgres 14.2
 asdf global postgres 14.2
+
+asdf install terraform 1.1.7
+asdf global terraform 1.1.7
 
 asdf install
 ```
