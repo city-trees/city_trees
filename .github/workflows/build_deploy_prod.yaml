@@ -66,7 +66,8 @@ jobs:
       run: |
         ssh $SERVER_USER@server "
           ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
-          
+
+          cat /dev/null > /home/devops/city_trees/current/.env
           echo 'PORT=2096' >> /home/devops/city_trees/current/.env
           echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /home/devops/city_trees/current/.env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /home/devops/city_trees/current/.env
