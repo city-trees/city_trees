@@ -71,4 +71,4 @@ jobs:
         EOF
 
     - name: Restart service
-      run: ssh $SERVER_USER@server systemctl restart city-tress.service
+      run: ssh $SERVER_USER@server sudo systemctl restart city-tress.service

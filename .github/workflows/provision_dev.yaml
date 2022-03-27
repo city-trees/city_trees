@@ -30,5 +30,14 @@ jobs:
             Port ${{ env.SERVER_PORT }}
             User ${{ env.SERVER_USER }}
 
+    - name: Upload provision to server
+      shell: bash -l {0}
+      run: >-
+        rsync 
+        -azr
+        --delete
+        ./provision/ ${SERVER_USER}@server:/home/devops/provision/
+
+
     - name: Provision server
       run: ssh $SERVER_USER@server 'bash -s' < ./provision/provision_dev.bash
