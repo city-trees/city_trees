@@ -31,4 +31,4 @@ jobs:
             User ${{ env.SERVER_USER }}
 
     - name: Provision server
-      run: ssh $SERVER_USER@server 'bash -s' < ./provision./provision_dev.bash
+      run: ssh $SERVER_USER@server 'bash -s' < ./provision/provision_dev.bash
