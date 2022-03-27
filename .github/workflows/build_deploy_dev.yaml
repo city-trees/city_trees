@@ -65,12 +65,14 @@ jobs:
         $BUILD_DIR ${SERVER_USER}@server:${DEPLOY_PATH}
 
     - name: Update current release
-      run: ssh $SERVER_USER@server << EOF 
-        ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
-        echo 'PORT=2096' >> /home/devops/city_trees/current/.env
-        echo 'DATABASE_URL=${{ secrets.DATABASE_URL_DEV }}' >>  /home/devops/city_trees/current/.env
-        echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_DEV }}' >> /home/devops/city_trees/current/.env
-        EOF
+      run: |
+        ssh $SERVER_USER@server "
+          ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
+          
+          echo 'PORT=2096' >> /home/devops/city_trees/current/.env
+          echo 'DATABASE_URL=${{ secrets.DATABASE_URL_DEV }}' >>  /home/devops/city_trees/current/.env
+          echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_DEV }}' >> /home/devops/city_trees/current/.env
+        "
 
     - name: Restart service
       run: ssh $SERVER_USER@server sudo systemctl restart city-tress.service
