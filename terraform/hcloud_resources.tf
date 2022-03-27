@@ -43,7 +43,7 @@ resource "hcloud_firewall" "server_firewall" {
   rule {
     direction = "in"
     protocol  = "tcp"
-    port      = "4000"
+    port      = "2096"
     source_ips = [
       "0.0.0.0/0",
       "::/0"
@@ -52,7 +52,7 @@ resource "hcloud_firewall" "server_firewall" {
 }
 
 resource "hcloud_server" "city_trees_dev" {
-  name        = "server1"
+  name        = "city-trees-dev"
   server_type = "cpx11"
   image       = "ubuntu-20.04"
   location    = "nbg1"
@@ -72,7 +72,7 @@ resource "hcloud_server" "city_trees_dev" {
 }
 
 resource "hcloud_server" "city_trees_prod" {
-  name        = "server1"
+  name        = "city-trees-prod"
   server_type = "cpx11"
   image       = "ubuntu-20.04"
   location    = "nbg1"

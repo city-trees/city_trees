@@ -4,7 +4,6 @@ users:
     groups: users, admin
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
-    passwd: $6$rounds=4096$0IRDjY8kAY8Ovx.9$E6lWYKLZwNedghkB6nP3MVw7FOCAZRshXri8K6az80MXzEh8/hCOKx5Cfwcviq.XPtXxfmRebebHOoRedRksd1
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpoAUd/eH0XumiT7KlVObP3NdA0knxaw/nSOKIWA+LP raziel@chieftec-lin
 package_update: true
