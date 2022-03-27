@@ -12,7 +12,7 @@ env:
   BUILD_DIR: .build/
 
 jobs:
-  build:
+  provision:
     runs-on: ubuntu-latest
     container: ghcr.io/city-trees/city_trees_buildpack:latest
     
