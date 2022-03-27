@@ -1,12 +1,11 @@
 [Unit]
-Description=City Tries App
+Description=City Trees App
 After=network.target
 
 [Install]
 WantedBy=multi-user.target
 
 [Service]
-WorkingDirectory=/home/devops/city_trees/current/prod/rel/server/bin/server
 ExecStart=/home/devops/city_trees/current/prod/rel/server/bin/server start
 ExecStop=/home/devops/city_trees/current/prod/rel/server/bin/server stop
 EnvironmentFile=/home/devops/city_trees/current/.env
@@ -16,7 +15,6 @@ RemainAfterExit=yes
 NoNewPrivileges=yes
 PrivateTmp=yes
 ProtectSystem=full
-ProtectHome=yes
 ProtectControlGroups=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
@@ -24,8 +22,11 @@ RestrictNamespaces=yes
 LockPersonality=yes
 PrivateDevices=yes
 PrivateUsers=yes
+RuntimeDirectory=city_trees 
+StateDirectory=city_trees
+CacheDirectory=city_trees 
+LogsDirectory=city_trees  
+ConfigurationDirectory=city_trees
 ProtectClock=yes
 ProtectKernelLogs=yes
 RestrictSUIDSGID=yes
-
-
