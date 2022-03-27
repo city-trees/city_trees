@@ -1,0 +1,34 @@
+name: Provision dev server
+
+on: [workflow_dispatch]
+
+env:
+  MIX_ENV: prod
+  NODE_ENV: production
+
+  SERVER_IP: 49.12.207.142
+  SERVER_PORT: 2211
+  SERVER_USER: devops
+  BUILD_DIR: .build/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/city-trees/city_trees_buildpack:latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2.3.1
+      with:
+        key: ${{ secrets.SSH_KEY_DEV }} 
+        known_hosts: ${{ secrets.SSH_KNOW_HOSTS_DEV }}   
+        config: |
+          Host server
+            HostName ${{ env.SERVER_IP }}
+            Port ${{ env.SERVER_PORT }}
+            User ${{ env.SERVER_USER }}
+
+    - name: Provision server
+      run: ssh $SERVER_USER@server 'bash -s' < ./provision./provision_dev.bash

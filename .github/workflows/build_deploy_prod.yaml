@@ -9,6 +9,8 @@ env:
   NODE_ENV: production
   SERVER_IP: 49.12.207.142
   SERVER_PORT: 2211
+  SERVER_USER: devops
+  BUILD_DIR: .build/
 
 jobs:
   build:
@@ -47,10 +49,10 @@ jobs:
             User ${{ env.SERVER_USER }}
 
     - name: Set build path
-      run: echo "BUILD_PATH=$(date --rfc-3339=date)_$GITHUB_SHA" >> $GITHUB_ENV
+      run: echo "DEPLOY_PATH=$REMOTE_DIR/city_trees/$(date --rfc-3339=date)_$GITHUB_SHA" >> $GITHUB_ENV
 
-    - name: Create destination (mkpath rsync)
-      run: ssh $SERVER_USER@server mkdir -p $REMOTE_DIR/city_trees/${BUILD_PATH}
+    - name: Create destination (mkpath replacement rsync)
+      run: ssh $SERVER_USER@server mkdir -p ${DEPLOY_PATH}
 
     - name: Upload new release to server
       shell: bash -l {0}
@@ -58,5 +60,15 @@ jobs:
         rsync 
         -azr
         --delete
-        $BUILD_DIR $SERVER_USER@server:$REMOTE_DIR/city_trees/${BUILD_PATH}/
+        $BUILD_DIR ${SERVER_USER}@server:${DEPLOY_PATH}
 
+    - name: Update current release
+      run: ssh $SERVER_USER@server << EOF 
+        ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
+        echo 'PORT=2096' >> /home/devops/city_trees/current/.env
+        echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /home/devops/city_trees/current/.env
+        echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /home/devops/city_trees/current/.env
+        EOF
+
+    - name: Restart service
+      run: ssh $SERVER_USER@server systemctl restart city-tress.service
