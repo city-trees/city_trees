@@ -67,7 +67,7 @@ jobs:
     - name: Update current release
       run: |
         ssh $SERVER_USER@server "
-          ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
+          ln -sfn ${DEPLOY_PATH} /home/devops/city_trees/current
 
           cat /dev/null > /home/devops/city_trees/current/.env
           echo 'PORT=2096' >> /home/devops/city_trees/current/.env

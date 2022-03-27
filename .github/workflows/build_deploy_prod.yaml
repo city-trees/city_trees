@@ -49,7 +49,7 @@ jobs:
             User ${{ env.SERVER_USER }}
 
     - name: Set build path
-      run: echo "DEPLOY_PATH=$REMOTE_DIR/city_trees/$(date --rfc-3339=date)_$GITHUB_SHA" >> $GITHUB_ENV
+      run: echo "DEPLOY_PATH=/home/devops/city_trees/$(date --rfc-3339=date)_$GITHUB_SHA" >> $GITHUB_ENV
 
     - name: Create destination (mkpath replacement rsync)
       run: ssh $SERVER_USER@server mkdir -p ${DEPLOY_PATH}
@@ -65,7 +65,7 @@ jobs:
     - name: Update current release
       run: |
         ssh $SERVER_USER@server "
-          ln -sf ${DEPLOY_PATH} /home/devops/city_trees/current
+          ln -sfn ${DEPLOY_PATH} /home/devops/city_trees/current
 
           cat /dev/null > /home/devops/city_trees/current/.env
           echo 'PORT=2096' >> /home/devops/city_trees/current/.env
