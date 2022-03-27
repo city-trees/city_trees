@@ -41,7 +41,7 @@ jobs:
       uses: shimataro/ssh-key-action@v2.3.1
       with:
         key: ${{ secrets.SSH_KEY_PROD }} 
-        known_hosts: ${{ secrets.SSH_KNOW_HOSTS_PROD }}   
+        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS_PROD }}   
         config: |
           Host server
             HostName ${{ env.SERVER_IP }}
