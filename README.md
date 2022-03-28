@@ -4,5 +4,30 @@
 - [Local setup](./docs/Local.md)
 
 
-docker run -t -i -v /home/raziel/MyProjects/city_trees_umbrella:/app builder /bin/bash
-scp -r -i ./terraform/.ssh/deploy -P 2211 city_trees_web.zip devops@49.12.207.142:/home/devops/
+
+## Install deps
+
+```bash
+mix deps.get
+```
+
+To compile dependencies
+
+```bash
+mix deps.compile
+
+```
+
+## Start app
+
+After completing local setup
+
+```bash 
+mix phx.server
+```
+
+To run inside interactive shell
+
+```bash
+iex -S mix phx.server
+```
