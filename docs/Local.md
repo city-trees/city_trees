@@ -92,16 +92,16 @@ When postgres is installed via asdf, database would run under current user
 ### Create database for local dev
 
 ```
-createdb city_trees_dev
+createdb city_trees
 psql -l
 
 ```
 ### Create database user
 
 ```
-psql -d city_trees_dev
-create user city_trees_dev with encrypted password 'city_trees_dev';
-grant all privileges on database city_trees_dev to city_trees_dev;
+psql -d city_trees
+create user city_trees with encrypted password 'city_trees';
+grant all privileges on database city_trees to city_trees;
 ```
 
 ## Install vscode plugins

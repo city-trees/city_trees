@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :city_trees, CityTrees.Repo,
-  username: "city_trees_dev",
-  password: "city_trees_dev",
+  username: "city_trees",
+  password: "city_trees",
   hostname: "localhost",
-  database: "city_trees_dev",
+  database: "city_trees",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
