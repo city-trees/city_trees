@@ -11,11 +11,9 @@ package_upgrade: true
   - ufw
   - unzip
 runcmd:
-  - sudo apt update
-  - sudo apt upgrade -y
-
   # Enable firewall
   - ufw enable
+
   - ufw allow 2211/tcp comment 'Open port ssh tcp port 2211'
   - ufw allow 2096/tcp comment 'Open port app tcp port 2096'
 

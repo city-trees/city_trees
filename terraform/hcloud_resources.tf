@@ -56,6 +56,7 @@ resource "hcloud_server" "city_trees_dev" {
   server_type = "cpx11"
   image       = "ubuntu-20.04"
   location    = "nbg1"
+  backups     = true
   ssh_keys    = keys(var.ssh_keys)
   firewall_ids = [
     hcloud_firewall.server_firewall.id
@@ -76,6 +77,7 @@ resource "hcloud_server" "city_trees_prod" {
   server_type = "cpx11"
   image       = "ubuntu-20.04"
   location    = "nbg1"
+  backups     = true
   ssh_keys    = keys(var.ssh_keys)
   firewall_ids = [
     hcloud_firewall.server_firewall.id
