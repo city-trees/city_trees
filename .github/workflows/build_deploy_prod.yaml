@@ -49,7 +49,7 @@ jobs:
             User ${{ env.SERVER_USER }}
 
     - name: Set build path
-      run: echo "DEPLOY_PATH=/var/city_trees/$(date -I)_$GITHUB_SHA" >> $GITHUB_ENV
+      run: echo "DEPLOY_PATH=/home/devops/city_trees/$(date -I)_$GITHUB_SHA" >> $GITHUB_ENV
 
     - name: Create destination (mkpath replacement rsync)
       run: ssh $SERVER_USER@server mkdir -p ${DEPLOY_PATH}
@@ -65,16 +65,16 @@ jobs:
     - name: Update current release
       run: |
         ssh $SERVER_USER@server "
-          ln -sfn ${DEPLOY_PATH} /var/city_trees/current
+          ln -sfn ${DEPLOY_PATH} /home/devops/city_trees/current
 
-          cat /dev/null > /var/city_trees/current/.env
-          echo 'PORT=2096' >> /var/city_trees/current/.env
-          echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /var/city_trees/current/.env
-          echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /var/city_trees/current/.env
+          cat /dev/null > /home/devops/city_trees/current/.env
+          echo 'PORT=2096' >> /home/devops/city_trees/current/.env
+          echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /home/devops/city_trees/current/.env
+          echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /home/devops/city_trees/current/.env
         "
 
     - name: Restart service
       run: |
         ssh $SERVER_USER@server sudo systemctl restart city-trees.service
-        ssh $SERVER_USER@server ls -dt /var/city_trees/* | tail -n +11 | xargs rm -rf
+        ssh $SERVER_USER@server ls -dt /home/devops/city_trees/* | tail -n +11 | xargs rm -rf
 

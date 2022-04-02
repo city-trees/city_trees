@@ -7,6 +7,6 @@ After=postgresql.service network.target network-online.target systemd-networkd.s
 Type=oneshot
 User=postgres
 Group=postgres
-ExecStart=/opt/pg-backup.bash
+ExecStart=/home/devops/provision/pg-backup.bash
 KillMode=process
 TimeoutStopSec=900

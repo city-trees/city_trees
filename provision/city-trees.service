@@ -6,12 +6,11 @@ After=network.target
 WantedBy=multi-user.target
 
 [Service]
-ExecStart=/var/city_trees/current/prod/rel/server/bin/server start
-ExecStop=/var/city_trees/current/prod/rel/server/bin/server stop
-EnvironmentFile=/var/city_trees/current/.env
+ExecStart=/home/devops/city_trees/current/prod/rel/server/bin/server start
+ExecStop=/home/devops/city_trees/current/prod/rel/server/bin/server stop
+EnvironmentFile=/home/devops/city_trees/current/.env
 Restart=always
 DynamicUser=yes
-ProtectHome=true
 RemainAfterExit=yes
 NoNewPrivileges=yes
 PrivateTmp=yes
