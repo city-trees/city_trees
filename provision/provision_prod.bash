@@ -11,9 +11,9 @@ sudo systemctl start city-trees.service
 sudo systemctl enable city-trees.service
 
 # Install Postgres and initialize the database
-sudo apt update
-sudo apt upgrade -y
-sudo apt install gnupg2 wget vim -y
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install gnupg2 wget vim -y
 
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -27,7 +27,8 @@ sudo -u postgres psql << EOF
 EOF
 
 # Configure backup service
-sudo cp -f ./provision/pg-backup.bash /opt/pg-backup.bash
+mkdir -p /home/devops/city_trees_backups
+sudo chown -R postgres:postgres /home/devops/city_trees_backups
 
 sudo cp -f ./provision/pg-backup.service /etc/systemd/system/pg-backup.service
 sudo systemctl daemon-reload
