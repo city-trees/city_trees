@@ -40,4 +40,4 @@ jobs:
 
 
     - name: Provision server
-      run: ssh $SERVER_USER@server 'bash -s' < ./provision/provision_prod.bash
+      run: ssh $SERVER_USER@server 'bash -s' < ./provision/provision.bash
