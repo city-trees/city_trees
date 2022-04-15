@@ -38,4 +38,3 @@ sudo systemctl enable pg-backup.service
 sudo cp -f ./provision/pg-backup.timer /etc/systemd/system/pg-backup.timer
 sudo systemctl daemon-reload
 sudo systemctl start pg-backup.timer
-sudo systemctl enable pg-backup.timer
