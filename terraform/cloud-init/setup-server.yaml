@@ -5,7 +5,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpoAUd/eH0XumiT7KlVObP3NdA0knxaw/nSOKIWA+LP raziel@chieftec-lin
+      ${ssh_authorized_keys}
 package_update: true
 package_upgrade: true
   - ufw
@@ -14,8 +14,10 @@ runcmd:
   # Enable firewall
   - ufw enable
 
+  - apt-get update
+  - apt-get upgrade
+
   - ufw allow 2211/tcp comment 'Open port ssh tcp port 2211'
-  - ufw allow 2096/tcp comment 'Open port app tcp port 2096'
 
   # ssh hardening
   # @see https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-20-04

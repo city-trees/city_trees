@@ -2,7 +2,7 @@ terraform {
   required_providers {
     hcloud = {
       source = "hetznercloud/hcloud"
-      version = "~> 1.32"
+      version = "~> 1.33"
     }
     cloudflare = {
       source = "cloudflare/cloudflare"
@@ -12,6 +12,9 @@ terraform {
       source = "hashicorp/cloudinit"
       version = "~> 2.2"
     }
+  }
+  backend "local" {
+    workspace_dir  = "state"
   }
 }
 
