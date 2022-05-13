@@ -40,4 +40,7 @@ jobs:
 
 
     - name: Provision server
-      run: ssh $SERVER_USER@server 'bash -s' < ./provision/provision.bash
+      run: |
+        ssh $SERVER_USER@server 'bash -s' < ./provision/pg.bash
+        ssh $SERVER_USER@server 'bash -s' < ./provision/city_trees.bash
+        ssh $SERVER_USER@server 'bash -s' < ./provision/minio-client.bash

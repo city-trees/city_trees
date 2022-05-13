@@ -15,8 +15,8 @@ pg_dump \
   --compress=3 \
   --verbose \
   --create \
-  --file=/home/devops/city_trees_backups/"$BACKUP_FILENAME"
+  --file=/city_trees_backups/"$BACKUP_FILENAME"
 
 
 # Remove old backups, keep only 10 most recent
-ls -dt /home/devops/city_trees_backups/* | tail -n +11 | xargs rm -rf
+ls -dt /city_trees_backups/* | tail -n +11 | xargs rm -rf

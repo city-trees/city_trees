@@ -6,11 +6,12 @@ After=network.target
 WantedBy=multi-user.target
 
 [Service]
-ExecStart=/home/devops/city_trees/current/prod/rel/server/bin/server start
-ExecStop=/home/devops/city_trees/current/prod/rel/server/bin/server stop
-EnvironmentFile=/home/devops/city_trees/current/.env
+ExecStart=/city_trees/current/prod/rel/server/bin/server start
+ExecStop=/city_trees/current/prod/rel/server/bin/server stop
+EnvironmentFile=/city_trees/current/.env
 Restart=always
 DynamicUser=yes
+ProtectHome=true
 RemainAfterExit=yes
 NoNewPrivileges=yes
 PrivateTmp=yes
@@ -24,8 +25,8 @@ PrivateDevices=yes
 PrivateUsers=yes
 RuntimeDirectory=city_trees 
 StateDirectory=city_trees
-CacheDirectory=city_trees 
-LogsDirectory=city_trees  
+CacheDirectory=city_trees
+LogsDirectory=city_trees
 ConfigurationDirectory=city_trees
 ProtectClock=yes
 ProtectKernelLogs=yes

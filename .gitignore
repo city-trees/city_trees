@@ -28,3 +28,9 @@ erl_crash.dump
 
 # Some local only secrets
 .env
+
+# Log files for pg anth other services
+*.log
+
+# SSH server keys
+*.ssh

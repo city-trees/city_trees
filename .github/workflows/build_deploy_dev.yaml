@@ -51,32 +51,30 @@ jobs:
             User ${{ env.SERVER_USER }}
 
     - name: Set build path
-      run: echo "DEPLOY_PATH=/home/devops/city_trees/$(date -I)_$GITHUB_SHA" >> $GITHUB_ENV
-
-    - name: Create destination (mkpath replacement rsync)
-      run: ssh $SERVER_USER@server mkdir -p ${DEPLOY_PATH}
+      run: echo "DEPLOY_PATH=/city_trees/$(date -I)_$GITHUB_SHA" >> $GITHUB_ENV
 
     - name: Upload new release to server
       shell: bash -l {0}
       run: >-
         rsync 
         -azr
+        --mkpath
         --delete
         $BUILD_DIR ${SERVER_USER}@server:${DEPLOY_PATH}
 
     - name: Update current release
       run: |
         ssh $SERVER_USER@server "
-          ln -sfn ${DEPLOY_PATH} /home/devops/city_trees/current
+          ln -sfn ${DEPLOY_PATH} /city_trees/current
 
-          cat /dev/null > /home/devops/city_trees/current/.env
-          echo 'PORT=2096' >> /home/devops/city_trees/current/.env
-          echo 'DATABASE_URL=${{ secrets.DATABASE_URL_DEV }}' >>  /home/devops/city_trees/current/.env
-          echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_DEV }}' >> /home/devops/city_trees/current/.env
+          cat /dev/null > /city_trees/current/.env
+          echo 'PORT=2096' >> /city_trees/current/.env
+          echo 'DATABASE_URL=${{ secrets.DATABASE_URL_DEV }}' >>  /city_trees/current/.env
+          echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_DEV }}' >> /city_trees/current/.env
         "
 
     - name: Restart service remove old versions
       run: |
         ssh $SERVER_USER@server sudo systemctl restart city-trees.service
-        ssh $SERVER_USER@server ls -dt /home/devops/city_trees/* | tail -n +11 | xargs rm -rf
+        ssh $SERVER_USER@server ls -dt /city_trees/* | tail -n +11 | xargs rm -rf
 

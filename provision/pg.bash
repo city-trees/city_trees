@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-set -u
-set -o pipefail
-
-# Install app systemd service
-sudo cp -f ./provision/city-trees.service /etc/systemd/system/city-trees.service
-sudo systemctl daemon-reload
-sudo systemctl start city-trees.service
-sudo systemctl enable city-trees.service
-
 # Install Postgres and initialize the database
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -27,8 +17,8 @@ sudo -u postgres psql << EOF
 EOF
 
 # Configure backup service
-mkdir -p /home/devops/city_trees_backups
-sudo chown -R postgres:postgres /home/devops/city_trees_backups
+mkdir -p /city_trees_backups
+sudo chown -R postgres:postgres /city_trees_backups
 
 sudo cp -f ./provision/pg-backup.service /etc/systemd/system/pg-backup.service
 sudo systemctl daemon-reload
