@@ -1,9 +1,20 @@
 # Terraform managed infrastructure
 
+## Workspaces
+
+This project use two workspaces
+- dev
+- prod
+
+To change workspace:
+
+```
+terraform workspace select dev
+```
 
 ## Output
 
-Once servers are deployed, we can use `terraform output` to get servers details
+Once servers are deployed, we can use `terraform output` to get servers details.
 
 ```hcl
 server_apps = [

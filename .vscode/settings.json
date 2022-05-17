@@ -1,5 +1,14 @@
 {
   "cSpell.words": [
 
-  ]
+  ], 
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/tmp": true,
+    "**/.build": true,
+    "**/.elixir_ls": true,
+    "**/deps": true,
+    "**/.terraform": true
+  },
 }
