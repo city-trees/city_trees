@@ -10,6 +10,17 @@ package_update: true
 package_upgrade: true
   - ufw
   - unzip
+
+write_files: 
+  - path: /etc/netplan/60-floating-ip.yaml
+    content: |
+      network:
+        version: 2
+        renderer: networkd
+        ethernets:
+          eth0:
+            addresses:
+            - ${floating_ip}/32    
 runcmd:
   # Enable firewall
   - ufw enable
@@ -54,6 +65,8 @@ runcmd:
   # Only allow devops user
   - sed -i '$a AllowUsers devops' /etc/ssh/sshd_config
   - systemctl reload sshd.service
-
+  
+  # Apply changes to get floating ip
+  - netplan apply
   # Additional reboot to ensure that all is updated
   - reboot

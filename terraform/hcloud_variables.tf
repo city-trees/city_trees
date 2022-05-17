@@ -7,6 +7,6 @@ variable "hcloud_token" {
 
 variable "app_servers" {
   default = {
-    "app1": {ip: "10.0.1.5", location: "nbg1"}
+    "01": {ip: "10.0.1.5", location: "nbg1"}
   }
 }

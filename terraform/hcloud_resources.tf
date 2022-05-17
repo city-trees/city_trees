@@ -25,9 +25,11 @@ resource "hcloud_ssh_key" "deploy_ssh_key" {
 }
 
 data "template_file" "user_data" {
-  template = file("./cloud-init/setup-server.yaml")
-   vars = {
+  for_each  = var.app_servers
+  template  = file("./cloud-init/setup-server.yaml")
+   vars     = {
     ssh_authorized_keys = "- ${hcloud_ssh_key.deploy_ssh_key.public_key}"
+    floating_ip = "${hcloud_floating_ip.app_server_ip[each.key].ip_address}"
   }
 }
 
@@ -64,7 +66,7 @@ resource "hcloud_firewall" "default" {
 
 resource "hcloud_server" "app_server" {
   for_each     = var.app_servers
-  name         = "server-${terraform.workspace}-${each.key}"
+  name         = "city-trees-${terraform.workspace}-${each.key}"
   server_type  = "cpx11"
   image        = "ubuntu-22.04"
   location     = each.value.location
@@ -76,7 +78,7 @@ resource "hcloud_server" "app_server" {
   firewall_ids = [
     hcloud_firewall.default.id
   ]
-  user_data   = data.template_file.user_data.rendered
+  user_data   = data.template_file.user_data[each.key].rendered
   network {
     network_id = hcloud_network.default.id
     ip         = each.value.ip
@@ -86,11 +88,28 @@ resource "hcloud_server" "app_server" {
   ]
 }
 
-output "app_ip_addr" {
+resource "hcloud_floating_ip" "app_server_ip" {
+  type          = "ipv4"
+  name          = "app-server-ip-${terraform.workspace}-${each.key}"
+  home_location = each.value.location
+  for_each      = var.app_servers
+  labels        = local.labels
+}
+
+resource "hcloud_floating_ip_assignment" "app_server_assignment" {
+  for_each        = var.app_servers
+  floating_ip_id  = hcloud_floating_ip.app_server_ip[each.key].id
+  server_id       = hcloud_server.app_server[each.key].id
+}
+
+
+output "server_apps" {
   value = [
-    for s in hcloud_server.app_server : {
-      ip: s.ipv4_address,
+    for k, s in hcloud_server.app_server : {
+      internal_ip: s.ipv4_address,
+      floating_ip: hcloud_floating_ip.app_server_ip[k].ip_address,
       id: s.id
+      labels: s.labels
     }
   ]
 }

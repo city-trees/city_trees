@@ -6,10 +6,15 @@
 Once servers are deployed, we can use `terraform output` to get servers details
 
 ```hcl
-app_ip_addr = [
+server_apps = [
   {
-    "id" = "20402105"
-    "ip" = "167.235.57.78"
+    "floating_ip" = "195.201.250.204"
+    "id" = "20523485"
+    "internal_ip" = "167.235.57.78"
+    "labels" = tomap({
+      "env" = "dev"
+      "project" = "city_trees"
+    })
   },
 ]
 ```
