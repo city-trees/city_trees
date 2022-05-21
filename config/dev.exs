@@ -25,7 +25,8 @@ config :city_trees_web, CityTreesWeb.Endpoint,
   secret_key_base: "FWcYtNn0TWKmE4QrBIfXNeBxqaUHU7EDyHCLY6tEobYxT10foY5KtdJGJhgHMCwE",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support

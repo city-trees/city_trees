@@ -46,6 +46,18 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
+  # Configure taiwind build
+  # @see https://github.com/phoenixframework/tailwind
+  config :tailwind,
+  version: "3.0.24",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../apps/city_trees_web/assets", __DIR__),
+  ]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -53,6 +65,7 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+config :tailwind, version: "3.0.24"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

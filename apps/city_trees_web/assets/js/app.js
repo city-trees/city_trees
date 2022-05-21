@@ -1,6 +1,5 @@
 // We import the CSS which is extracted to its own file by esbuild.
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
-import "../css/app.css"
 
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
@@ -42,23 +41,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
-
-mapboxgl.accessToken = 'pk.eyJ1IjoibWFyY2lua29wYWN6IiwiYSI6ImNrenlteHJvaTAxdWUzY254ZHppMG5nN3QifQ.U3tuBCRNFosiS3buKpUxnQ';
-const map = new mapboxgl.Map({
-  container: 'map', // container ID
-  style: 'mapbox://styles/mapbox/streets-v11', // style URL
-  center: [-74.5, 40], // starting position [lng, lat]
-  zoom: 9 // starting zoom
-  });
-
-
-  const layerList = document.getElementById('menu');
-const inputs = layerList.getElementsByTagName('input');
- 
-for (const input of inputs) {
-input.onclick = (layer) => {
-const layerId = layer.target.id;
-map.setStyle('mapbox://styles/mapbox/' + layerId);
-};
-}

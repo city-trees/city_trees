@@ -1,5 +1,6 @@
-/* This file is for your main application CSS */
-@import "./phoenix.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Alerts and form errors used by phx.new */
 .alert {
@@ -33,23 +34,6 @@
   color: #a94442;
   display: block;
   margin: -1rem 0 2rem;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-}
-#map {
-  height: 100%;
-  width: 100%;
-}
-
-#menu {
-  position: absolute;
-  background: #efefef;
-  padding: 10px;
-  top: 0;
 }
 
 /* LiveView specific classes for your customization */
@@ -135,3 +119,4 @@ html, body {
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
