@@ -41,7 +41,12 @@ config :esbuild,
   version: "0.14.0",
   default: [
     args:
-      ~w(js/app.js --bundle --target=es2020 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+      ~w(
+        js/app.js
+        --bundle
+        --target=es2020
+        --outdir=../priv/static/assets --external:/fonts/* --external:/images/*
+      ),
     cd: Path.expand("../apps/city_trees_web/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]

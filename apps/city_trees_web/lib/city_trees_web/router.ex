@@ -60,7 +60,10 @@ defmodule CityTreesWeb.Router do
   ## Authentication routes
 
   scope "/", CityTreesWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [
+      :browser,
+      :redirect_if_user_is_authenticated
+    ]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
@@ -73,7 +76,10 @@ defmodule CityTreesWeb.Router do
   end
 
   scope "/", CityTreesWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [
+      :browser,
+      :require_authenticated_user
+    ]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
@@ -81,7 +87,9 @@ defmodule CityTreesWeb.Router do
   end
 
   scope "/", CityTreesWeb do
-    pipe_through [:browser]
+    pipe_through [
+      :browser
+    ]
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new

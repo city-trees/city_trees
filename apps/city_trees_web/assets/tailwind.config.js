@@ -1,5 +1,9 @@
 module.exports = {
-  content: ['../lib/**/*.heex'],
+  content: [
+    '../lib/**/*.heex',
+    '../lib/**/*.*.heex',
+    '../lib/**/*.ex'
+  ],
   theme: {
     extend: {},
   },

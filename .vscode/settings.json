@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
-
+    "heex",
+    "tailwindcss"
   ], 
   "search.exclude": {
     "**/.git": true,
