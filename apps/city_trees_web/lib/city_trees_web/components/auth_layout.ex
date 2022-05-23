@@ -1,6 +1,7 @@
 defmodule AuthLayout do
   use Phoenix.Component
 
+  @spec layout(any) :: Phoenix.LiveView.Rendered.t()
   def layout(assigns) do
     ~H"""
     <div class="min-h-full flex">

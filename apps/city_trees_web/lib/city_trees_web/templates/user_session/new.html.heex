@@ -1,10 +1,8 @@
 <AuthLayout.layout title="Log in">
 
-  <.form let={f} for={@conn}  class="space-y-6" action={Routes.user_session_path(@conn, :create)} as={:user}>
+  <.form let={f} for={@conn} class="space-y-6" action={Routes.user_session_path(@conn, :create)} as={:user}>
     <%= if @error_message do %>
-      <div class="alert alert-danger">
-        <p><%= @error_message %></p>
-      </div>
+      <TailwindAlert.error message={@error_message} />
     <% end %>
 
     <TailwindForm.email_input form={f} />
@@ -14,7 +12,7 @@
     <%= checkbox f, :remember_me %>
 
     <div>
-      <%= submit "Log in", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <TailwindButton.primary type="submit" size={:medium}>Log in</TailwindButton.primary>
     </div>
   </.form>
 
