@@ -42,4 +42,5 @@ jobs:
     - name: Provision server
       run: |
         ssh $SERVER_USER@server 'bash -s' < ./provision/pg.bash
-        ssh $SERVER_USER@server 'bash -s' < ./provision/city_trees.bash
+        ssh $SERVER_USER@server 'bash -s' < ./provision/city_trees.bash'
+        ssh $SERVER_USER@server 'bash -s' < ./provision/netdata.bash
