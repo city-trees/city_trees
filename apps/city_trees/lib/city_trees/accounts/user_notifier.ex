@@ -8,7 +8,7 @@ defmodule CityTrees.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"MyApp", "contact@example.com"})
+      |> from({"MyApp", "marcin@citytrees.eu"})
       |> subject(subject)
       |> text_body(body)
 

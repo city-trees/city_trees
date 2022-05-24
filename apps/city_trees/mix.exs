@@ -41,7 +41,8 @@ defmodule CityTrees.MixProject do
       {:ecto_sql, "~> 3.7"},
       {:postgrex, ">= 0.16.2"},
       {:jason, "~> 1.3"},
-      {:swoosh, "~> 1.6"}
+      {:swoosh, "~> 1.6"},
+      {:gen_smtp, "~> 1.0"}
     ]
   end
 

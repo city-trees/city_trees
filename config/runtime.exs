@@ -13,6 +13,21 @@ if config_env() == :prod do
   # Secret is generatedwith mix phx.gen.secret, stored in fly.io secrets.
   secret_key_base = System.get_env("SECRET_KEY_BASE") || raise "SECRET_KEY_BASE not avalibe"
 
+  # Password for fastmail smtp
+  fastmail_password = System.get_env("FASTMAIL_PASSWORD") || raise "FASTMAIL_PASSWORD not avalibe"
+
+  config :city_trees, CityTrees.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: "smtp.fastmail.com",
+    username: "marcin_kopacz@fastmail.com",
+    password: fastmail_password,
+    ssl: true,
+    tls: :never,
+    auth: :always,
+    port: 465,
+    retries: 2,
+    no_mx_lookups: false
+
   config :city_trees, CityTrees.Repo,
     url: database_url,
     socket_options: [:inet6],
