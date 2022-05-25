@@ -1,6 +1,5 @@
 <AuthLayout.layout title="Log in">
-
-  <.form let={f} for={@conn} class="space-y-6" action={Routes.user_session_path(@conn, :create)} as={:user}>
+  <.form let={f} for={@conn} class="space-y-4" action={Routes.user_session_path(@conn, :create)} as={:user}>
     <%= if @error_message do %>
       <TailwindAlert.error message={@error_message} />
     <% end %>
@@ -8,15 +7,16 @@
     <TailwindForm.email_input form={f} />
     <TailwindForm.password_input form={f} />
 
-    <%= label f, :remember_me, "Keep me logged in for 60 days" %>
-    <%= checkbox f, :remember_me %>
-
-    <div>
-      <TailwindButton.primary type="submit" size={:medium}>Log in</TailwindButton.primary>
-    </div>
+    <TailwindForm.checkbox 
+      form={f} 
+      field={:remember_me} 
+      label="Keep me logged in for 60 days"
+    />
+    
+    <TailwindButton.primary type="submit" size={:medium}>Log in</TailwindButton.primary>
   </.form>
 
-  <p>
+  <p class="pt-2"> 
     <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
     <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
   </p>

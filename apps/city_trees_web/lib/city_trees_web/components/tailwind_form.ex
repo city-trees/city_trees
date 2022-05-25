@@ -27,24 +27,55 @@ defmodule TailwindForm do
   end
 
   def password_input(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:field, fn -> :password end)
+      |> assign_new(:label, fn -> "Password" end)
+
     ~H"""
     <div class="space-y-1">
       <%= Form.label(
         assigns.form,
-        :password,
-        "Password",
+        assigns.field,
+        assigns.label,
         class: "block text-sm font-medium text-gray-700"
       ) %>
       <div class="mt-1">
         <%= Form.password_input(
           assigns.form,
-          :password,
+          assigns.field,
           required: true,
           autocomplete: "current-password",
           class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         ) %>
       </div>
-      <%= error_tag assigns.form, :password %>
+      <%= error_tag assigns.form, assigns.field %>
+    </div>
+    """
+  end
+
+
+  def checkbox(assigns) do
+    ~H"""
+    <div class="relative flex items-start">
+      <div class="flex items-center h-5">
+        <%= Form.checkbox(
+          assigns.form,
+          assigns.field,
+          class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+        ) %>
+      </div>
+      <div class="ml-3 text-sm">
+        <%= Form.label(
+          assigns.form,
+          assigns.field,
+          assigns.label,
+          class: "block text-sm font-medium text-gray-700"
+        ) %>
+        <span id="offers-description" class="text-gray-500">
+          <span class="sr-only"> <% assigns.label %></span>
+        </span>
+      </div>
     </div>
     """
   end

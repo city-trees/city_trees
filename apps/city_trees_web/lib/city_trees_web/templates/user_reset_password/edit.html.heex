@@ -1,25 +1,18 @@
 <AuthLayout.layout title="Reset password">
-  <.form let={f} for={@changeset} action={Routes.user_reset_password_path(@conn, :update, @token)}>
+  <.form let={f} for={@changeset} class="space-y-4" action={Routes.user_reset_password_path(@conn, :update, @token)}>
     <%= if @changeset.action do %>
       <TailwindAlert.error 
         message="Oops, something went wrong! Please check the errors below."} 
       />
     <% end %>
 
-    <%= label f, :password, "New password" %>
-    <%= password_input f, :password, required: true %>
-    <%= error_tag f, :password %>
+    <TailwindForm.password_input form={f} field={:password} label="New password" />
+    <TailwindForm.password_input form={f} field={:password_confirmation} label="Confirm new password"/>
 
-    <%= label f, :password_confirmation, "Confirm new password" %>
-    <%= password_input f, :password_confirmation, required: true %>
-    <%= error_tag f, :password_confirmation %>
-
-    <div>
-      <%= submit "Reset password" %>
-    </div>
+    <TailwindButton.primary type="submit" size={:medium}>Reset password</TailwindButton.primary>
   </.form>
 
-  <p>
+  <p class="pt-2">
     <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
     <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
   </p>

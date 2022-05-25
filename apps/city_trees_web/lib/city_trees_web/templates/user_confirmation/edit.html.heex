@@ -1,9 +1,9 @@
 <AuthLayout.layout title="Confirm account">
-  <.form let={_f} for={:user} action={Routes.user_confirmation_path(@conn, :update, @token)}>
+  <.form let={_f} for={:user} class="space-y-4" action={Routes.user_confirmation_path(@conn, :update, @token)}>
     <TailwindButton.primary type="submit" size={:medium}>Confirm my account</TailwindButton.primary>
   </.form>
 
-  <p>
+  <p class="pt-2">
     <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
     <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
   </p>
