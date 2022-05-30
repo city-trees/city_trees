@@ -8,8 +8,15 @@ defmodule TailwindAlert do
   end
 
   def error(assigns) do
+    assigns = assign_new(assigns, :class, fn -> nil end)
+
+    wrapper_class = case assigns.class do
+        nil -> "rounded-md bg-red-50 p-4"
+        _ -> "#{assigns.class} rounded-md bg-red-50 p-4"
+    end
+
     ~H"""
-    <div class="rounded-md bg-red-50 p-4">
+    <div class={wrapper_class}>
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

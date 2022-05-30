@@ -1,5 +1,21 @@
-<main class="h-full">
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+<main class="h-full w-full">
+  <%
+    info = get_flash(@conn, :info)
+    error = get_flash(@conn, :error)
+  %>
+  <%= if info do %>
+    <TailwindAlert.info 
+      message={get_flash(@conn, :info)} 
+      class="absolute w-full" 
+    />
+  <% end %>
+
+  <%= if error do %>
+    <TailwindAlert.error 
+      message={get_flash(@conn, :error)} 
+      class="absolute w-full" 
+    />
+  <% end %>
   <%= @inner_content %>
 </main>
+                                      
