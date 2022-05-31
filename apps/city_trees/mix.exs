@@ -42,7 +42,7 @@ defmodule CityTrees.MixProject do
       {:postgrex, ">= 0.16.2"},
       {:jason, "~> 1.3"},
       {:swoosh, "~> 1.6"},
-      {:gen_smtp, "~> 1.0"}
+      {:gen_smtp, "~> 1.2"}
     ]
   end
 
