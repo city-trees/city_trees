@@ -36,7 +36,7 @@ defmodule CityTrees.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 2.0"},
+      {:bcrypt_elixir, "~> 2.3"},
       {:phoenix_pubsub, "~> 2.1"},
       {:ecto_sql, "~> 3.8"},
       {:postgrex, ">= 0.16.2"},
