@@ -1,0 +1,36 @@
+<h1>Show Tree</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.tree_show_path(@socket, :show, @tree)}>
+    <.live_component
+      module={CityTreesWeb.TreeLive.FormComponent}
+      id={@tree.id}
+      title={@page_title}
+      action={@live_action}
+      tree={@tree}
+      return_to={Routes.tree_show_path(@socket, :show, @tree)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Spiecies:</strong>
+    <%= @tree.spiecies %>
+  </li>
+
+  <li>
+    <strong>Diameter low:</strong>
+    <%= @tree.diameter_low %>
+  </li>
+
+  <li>
+    <strong>Diameter high:</strong>
+    <%= @tree.diameter_high %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.tree_show_path(@socket, :edit, @tree), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.tree_index_path(@socket, :index) %></span>

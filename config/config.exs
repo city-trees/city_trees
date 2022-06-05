@@ -58,6 +58,7 @@ config :esbuild,
   default: [
     args: ~w(
       --config=tailwind.config.js
+      --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
     cd: Path.expand("../apps/city_trees_web/assets", __DIR__),

@@ -75,16 +75,23 @@ defmodule TailwindAlert do
   end
 
   defp inner_alert(assigns) do
+    wrapper_color_class = case assigns.type do
+      :error -> "bg-red-50"
+      :info -> "bg-blue-50"
+      :warning -> "bg-yellow-50"
+      :success -> "bg-green-50"
+    end
+
     wrapper_class = case assigns.class do
-      nil -> "rounded-md bg-red-50 p-4"
-      _ -> "#{assigns.class} rounded-md bg-red-50 p-4"
+      nil -> "rounded-md #{wrapper_color_class} p-4"
+      _ -> "#{assigns.class} rounded-md #{wrapper_color_class} p-4"
     end
 
     message_class = case assigns.type do
       :error -> "text-sm font-medium text-red-800"
       :info -> "text-sm font-medium text-blue-700"
       :warning -> "text-sm font-medium text-yellow-700"
-      :success -> "text-sm font-medium text-yellow-700"
+      :success -> "text-sm font-medium text-green-700"
     end
 
 

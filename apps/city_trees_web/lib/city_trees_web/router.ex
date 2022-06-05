@@ -51,6 +51,14 @@ defmodule CityTreesWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+
+    live "/trees", TreeLive.Index, :index
+    live "/trees/new", TreeLive.Index, :new
+    live "/trees/:id/edit", TreeLive.Index, :edit
+
+    live "/trees/:id", TreeLive.Show, :show
+    live "/trees/:id/show/edit", TreeLive.Show, :edit
   end
 
   scope "/", CityTreesWeb do
