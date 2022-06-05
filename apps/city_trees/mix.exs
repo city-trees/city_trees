@@ -39,7 +39,7 @@ defmodule CityTrees.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix_pubsub, "~> 2.1"},
       {:ecto_sql, "~> 3.8"},
-      {:postgrex, ">= 0.16.2"},
+      {:postgrex, ">= 0.16.3"},
       {:jason, "~> 1.3"},
       {:swoosh, "~> 1.7"},
       {:gen_smtp, "~> 1.2"}
