@@ -2,7 +2,7 @@
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.tree_index_path(@socket, :index)}>
     <.live_component
-      module={CityTreesWeb.TreeLive.FormComponent}
+      module={CityTreesWeb.TreeLive.TreeForm}
       id={@tree.id || :new}
       title={@page_title}
       action={@live_action}

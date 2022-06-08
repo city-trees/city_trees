@@ -1,4 +1,4 @@
-defmodule CityTreesWeb.TreeLive.FormComponent do
+defmodule CityTreesWeb.TreeLive.TreeForm do
   use CityTreesWeb, :live_component
 
   alias CityTrees.Trees
