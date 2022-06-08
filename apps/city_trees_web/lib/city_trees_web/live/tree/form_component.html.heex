@@ -11,9 +11,10 @@
     class="space-y-4" 
   >
 
-    <TailwindForm.number_input field={:spiecies} form={f} label="Spiecies" />
+    <TailwindForm.number_input field={:spiecies_id} form={f} label="Spiecies" />
     <TailwindForm.number_input field={:diameter_low} form={f} label="Diameter low" />
     <TailwindForm.number_input field={:diameter_high} form={f} label="Diameter high" />
+    <TailwindForm.text_input field={:description} form={f} label="Description" />
 
     <TailwindButton.primary type="submit" size={:medium}>Save</TailwindButton.primary>  
   </.form>

@@ -82,6 +82,34 @@ defmodule TailwindForm do
     """
   end
 
+  def text_input(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:field, fn -> :description end)
+      |> assign_new(:label, fn -> "Text" end)
+
+    ~H"""
+    <div class="space-y-1">
+      <%= Form.label(
+        assigns.form,
+        assigns.field,
+        assigns.label,
+        class: "block text-sm font-medium text-gray-700"
+      ) %>
+      <div class="mt-1">
+        <%= Form.text_input(
+          assigns.form,
+          assigns.field,
+          required: true,
+          autocomplete: assigns.field,
+          class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ) %>
+      </div>
+      <%= error_tag assigns.form, assigns.field %>
+    </div>
+    """
+  end
+
   def checkbox(assigns) do
     ~H"""
     <div class="relative flex items-start">
