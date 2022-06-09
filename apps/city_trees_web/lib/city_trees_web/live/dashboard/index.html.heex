@@ -1,12 +1,12 @@
 
-<div class="h-full w-full flex" x-data="{ open: false }">
+<div class="h-full flex" x-data="{ open: false }">
   
   
   <!-- Off-canvas menu for mobile -->
-  <div class="relative lg:hidden" role="dialog" aria-modal="true" x-show="open" x-transition.opacity>
+  <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true" x-show="open" x-transition.opacity>
     <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
-    <div class="fixed inset-0 flex" >
+    <div class="fixed inset-0 flex z-40" >
       <!-- ff-canvas menu, show/hide based on off-canvas menu state. -->
       <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
         <div class="absolute top-0 right-0 -mr-12 pt-2">
@@ -42,10 +42,10 @@
   </div>
 
   <!-- Main area -->
-  <div class="flex flex-col flex-1">
+  <div class="relative flex flex-col z-0 flex-1">
     <!-- Mobile header only visible on mobile -->
     <.live_component module={CityTreesWeb.DashboardLive.MobileHeader} id="mobile_header"/>
-    
+
     <!-- Main area of application -->
     <.live_component module={CityTreesWeb.DashboardLive.MainArea} id="main_area"/>
   </div>
