@@ -1,25 +1,20 @@
 
-<div class="h-full flex" x-data="{ open: false }">
-  
+<div class="h-full flex">
   
   <!-- Off-canvas menu for mobile -->
-  <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true" x-show="open" x-transition.opacity>
+  <mobile-nav class="relative z-40 lg:hidden translate-x-0" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
-    <div class="fixed inset-0 flex z-40" >
+    <div class="fixed inset-0 flex z-40">
       <!-- ff-canvas menu, show/hide based on off-canvas menu state. -->
       <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
         <div class="absolute top-0 right-0 -mr-12 pt-2">
-          <button 
-            @click="open = false"
+          <mobile-nav-toggle 
             type="button" 
             class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <span class="sr-only">Close sidebar</span>
-            <!-- Heroicon name: outline/x -->
-            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+            <Heroicon.outline_x />
+          </mobile-nav-toggle>
         </div>
 
         <.live_component module={CityTreesWeb.DashboardLive.Navigation} id="navigation_mobile"/>
@@ -29,7 +24,7 @@
       <!-- Force sidebar to shrink to fit close icon -->
       <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
     </div>
-  </div>
+  </mobile-nav>
 
   <!-- Static sidebar for desktop -->
   <div class="hidden lg:flex lg:flex-shrink-0">
