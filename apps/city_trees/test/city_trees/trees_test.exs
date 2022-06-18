@@ -8,7 +8,7 @@ defmodule CityTrees.TreesTest do
 
     import CityTrees.TreesFixtures
 
-    @invalid_attrs %{diameter_high: nil, diameter_low: nil, spiecies: nil}
+    @invalid_attrs %{diameter_high: nil, diameter_low: nil, spiecies_id: nil}
 
     test "list_trees/0 returns all trees" do
       tree = tree_fixture()
@@ -21,7 +21,7 @@ defmodule CityTrees.TreesTest do
     end
 
     test "create_tree/1 with valid data creates a tree" do
-      valid_attrs = %{diameter_high: 42, diameter_low: 42, spiecies: 42}
+      valid_attrs = %{diameter_high: 42, diameter_low: 42, spiecies_id: 42}
 
       assert {:ok, %Tree{} = tree} = Trees.create_tree(valid_attrs)
       assert tree.diameter_high == 42
@@ -35,7 +35,7 @@ defmodule CityTrees.TreesTest do
 
     test "update_tree/2 with valid data updates the tree" do
       tree = tree_fixture()
-      update_attrs = %{diameter_high: 43, diameter_low: 43, spiecies: 43}
+      update_attrs = %{diameter_high: 43, diameter_low: 43, spiecies_id: 43}
 
       assert {:ok, %Tree{} = tree} = Trees.update_tree(tree, update_attrs)
       assert tree.diameter_high == 43

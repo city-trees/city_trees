@@ -39,10 +39,15 @@
   <!-- Main area -->
   <div class="relative flex flex-col z-0 flex-1">
     <!-- Mobile header only visible on mobile -->
-    <.live_component module={CityTreesWeb.DashboardLive.MobileHeader} id="mobile_header"/>
+    <.live_component 
+      module={CityTreesWeb.DashboardLive.MobileHeader} 
+      id="mobile_header"
+    />
 
     <!-- Main area of application -->
-    <.live_component module={CityTreesWeb.DashboardLive.MainArea} id="main_area"/>
+    <div class="relative overflow-auto columns-1">
+      <%= render_slot(@inner_block) %>
+    </div>
   </div>
 </div>
 

@@ -20,15 +20,6 @@ defmodule CityTreesWeb.Router do
   scope "/", CityTreesWeb do
     pipe_through [
       :browser,
-      :require_authenticated_user
-    ]
-
-    get "/", PageController, :index
-  end
-
-  scope "/", CityTreesWeb do
-    pipe_through [
-      :browser,
       :redirect_if_user_is_authenticated
     ]
 
@@ -58,8 +49,6 @@ defmodule CityTreesWeb.Router do
 
     live "/trees/:id", TreeLive.Show, :show
     live "/trees/:id/show/edit", TreeLive.Show, :edit
-
-    live "/dashboard", DashboardLive.Index, :index
   end
 
   scope "/", CityTreesWeb do
