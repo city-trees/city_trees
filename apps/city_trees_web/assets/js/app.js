@@ -1,7 +1,5 @@
-import './components.js'
-import './resizible-panels.js'
-
 import "phoenix_html"
+
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"

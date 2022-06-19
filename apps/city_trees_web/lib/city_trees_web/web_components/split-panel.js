@@ -23,6 +23,8 @@ class WcSplitPanel extends HTMLElement {
                 display: grid;
                 min-height: 100%;
                 max-height: 100%;
+                min-width: 100%;
+                max-width: 100%;
               }
               :host([resizing]){ 
                 user-select: none; 
@@ -89,6 +91,7 @@ class WcSplitPanel extends HTMLElement {
       this.removeEventListener("pointerup", this.pointerup);
   }
   resizeDrag(e){
+      e.stopPropagation()
       if(this.direction === "row"){
           const newMedianLeft = e.clientX - this.left;
           const median = this.dom.median.getBoundingClientRect().width;
@@ -129,5 +132,5 @@ class WcSplitPanel extends HTMLElement {
   }
 }
 
-customElements.define("wc-split-panel", WcSplitPanel);
+customElements.define("split-panel", WcSplitPanel);
 

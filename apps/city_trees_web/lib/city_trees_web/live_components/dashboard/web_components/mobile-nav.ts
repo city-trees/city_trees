@@ -6,9 +6,10 @@ class MobileNav extends HTMLElement {
 customElements.define('mobile-nav', MobileNav)
 
 class MobileNavClose extends HTMLElement {
+  private navBar: HTMLElement;
+
   connectedCallback() {
     this.navBar = document.querySelector('mobile-nav');
-    this.mobilNavClose = document.querySelector('mobile-nav-close');
 
     this.addEventListener('click', () => {
       this.navBar.classList.toggle('-translate-x-full')
@@ -24,6 +25,9 @@ customElements.define('mobile-nav-close', MobileNavClose)
 
 
 class MobileNavToggle extends HTMLElement {
+  private navBar: HTMLElement;
+  private mobilNavClose: HTMLElement;
+
   connectedCallback() {
     this.navBar = document.querySelector('mobile-nav');
     this.mobilNavClose = document.querySelector('mobile-nav-close');

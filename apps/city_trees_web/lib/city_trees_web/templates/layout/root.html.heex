@@ -4,15 +4,6 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <link 
-      href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" 
-      rel="stylesheet" />
-    <script 
-      src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"
-      type="javascript"
-    />
-
     <%= csrf_meta_tag() %>
     
     <%= live_title_tag assigns[:page_title] || "City Trees" %>
@@ -27,8 +18,15 @@
       defer 
       phx-track-static 
       type="text/javascript" 
+      src={Routes.static_path(@conn, "/assets/global.js")}>
+    </script>
+    <script 
+      defer 
+      phx-track-static 
+      type="text/javascript" 
       src={Routes.static_path(@conn, "/assets/app.js")}>
     </script>
+    
   </head>
   <body class="h-full w-full">
     <%= @inner_content %>

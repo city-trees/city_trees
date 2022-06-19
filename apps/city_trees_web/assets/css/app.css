@@ -2,13 +2,13 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-wc-split-panel[direction=row]::part(median) {
-  width: 20px;
-  background: red;
+
+split-panel[direction=row]::part(median) {
+  width: 10px;
+  background: grey;
 }
-wc-split-panel[direction=column]::part(median) {
+split-panel[direction=column]::part(median) {
   height: 20px;
-  
   background: blue;
 }
 

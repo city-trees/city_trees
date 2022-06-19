@@ -1,0 +1,13 @@
+{
+  "name": "@city-trees/umbrella",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/chyzwar/city_trees.git",
+  "author": "chyzwar <schizek.marcin@gmail.com>",
+  "license": "UNLICENCED",
+  "private": true,
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    "apps/*"
+  ]
+}
