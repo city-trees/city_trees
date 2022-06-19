@@ -9,12 +9,12 @@
       <!-- ff-canvas menu, show/hide based on off-canvas menu state. -->
       <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
         <div class="absolute top-0 right-0 -mr-12 pt-2">
-          <mobile-nav-toggle 
+          <mobile-nav-close
             type="button" 
-            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white opacity-0">
             <span class="sr-only">Close sidebar</span>
             <HeroiconOutline.x />
-          </mobile-nav-toggle>
+          </mobile-nav-close>
         </div>
 
         <.live_component module={CityTreesWeb.DashboardLive.Navigation} id="navigation_mobile"/>
@@ -45,7 +45,7 @@
     />
 
     <!-- Main area of application -->
-    <div class="relative overflow-auto columns-1">
+    <div class="relative overflow-auto columns-1 min-h-full min-w-full">
       <%= render_slot(@inner_block) %>
     </div>
   </div>
