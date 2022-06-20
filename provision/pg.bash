@@ -18,7 +18,7 @@ sudo -u postgres psql << EOF
 EOF
 
 # Configure backup service
-mkdir -p /city_trees_backups
+sudo mkdir -p /city_trees_backups
 sudo chown -R postgres:postgres /city_trees_backups
 
 sudo cp -f ./provision/pg-backup.service /etc/systemd/system/pg-backup.service
