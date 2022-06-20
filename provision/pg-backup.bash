@@ -4,6 +4,7 @@ set -e
 set -u
 set -o pipefail
 
+echo "start"
 # Declare backup filename
 BACKUP_FILENAME=$(date -I)_city_tree_db.sql
 

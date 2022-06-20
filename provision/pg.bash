@@ -9,6 +9,7 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get -y update
 sudo apt-get -y install postgresql-14
+sudo apt-get install postgis postgresql-14-postgis-3
 
 sudo -u postgres psql << EOF
   CREATE EXTENSION postgis;
@@ -21,6 +22,7 @@ EOF
 sudo mkdir -p /city_trees_backups
 sudo chown -R postgres:postgres /city_trees_backups
 
+sudo cp -f ./provision/pg-backup.bash /city_trees_backups/
 sudo cp -f ./provision/pg-backup.service /etc/systemd/system/pg-backup.service
 sudo systemctl daemon-reload
 sudo systemctl start pg-backup.service
