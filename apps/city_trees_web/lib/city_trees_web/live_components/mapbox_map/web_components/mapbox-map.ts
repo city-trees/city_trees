@@ -1,4 +1,4 @@
-import {Map, GeolocateControl }from 'mapbox-gl'
+import { Map, GeolocateControl } from 'mapbox-gl'
 
 // @see https://github.com/anneb/mapbox-wc
 class MapboxMap extends HTMLElement {
@@ -8,24 +8,34 @@ class MapboxMap extends HTMLElement {
     this.render();
 
     const container = this.shadowRoot.querySelector('#map-container') as HTMLDivElement;
-    
+
     this.map = new Map({
       accessToken: 'pk.eyJ1IjoibWFyY2lua29wYWN6IiwiYSI6ImNrenlteHJvaTAxdWUzY254ZHppMG5nN3QifQ.U3tuBCRNFosiS3buKpUxnQ',
       container,
-      style: 'mapbox://styles/mapbox/streets-v11', 
-      center: [-96, 37.8],
-      zoom: 3 
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [17.03, 51.1],
+      zoom: 12
     });
-	
+
     this.map.addControl(
-    new GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true
-      },
+      new GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
         trackUserLocation: true,
         showUserHeading: true
       })
     );
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.contentBoxSize) {
+          this.map.resize();
+        }
+      }
+    });
+    resizeObserver.observe(container);
+
   }
   render() {
     this.attachShadow({ mode: "open" });
@@ -37,7 +47,7 @@ class MapboxMap extends HTMLElement {
             width: 100%;
           }
         </style>
-
+        
         <div id="map-container" part="map-container"></div>
     `;
   }
