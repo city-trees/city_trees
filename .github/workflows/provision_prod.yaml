@@ -6,7 +6,7 @@ env:
   MIX_ENV: prod
   NODE_ENV: production
 
-  SERVER_IP: 49.12.207.142
+  SERVER_IP: 195.201.250.214
   SERVER_PORT: 2211
   SERVER_USER: devops
   BUILD_DIR: .build/
