@@ -8,9 +8,11 @@ sudo apt-get install gnupg2 wget vim -y
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt -y update
-sudo apt -y install postgresql-14
+sudo apt -y install postgresql-15
+sudo apt -y install gnupg2
 
 sudo -u postgres psql << EOF
+  CREATE EXTENSION postgis;
   CREATE DATABASE city_trees;
   CREATE USER city_trees WITH ENCRYPTED PASSWORD 'city_trees';
   GRANT ALL PRIVILEGES ON DATABASE city_trees TO city_trees;
