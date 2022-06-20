@@ -8,8 +8,8 @@ set -o pipefail
 sudo ufw allow 2096/tcp comment 'Open port app tcp port 2096'
 
 # Create folders for app
-sudo mkdir -p /city-trees
-sudo chown -R devops:devops /city-trees
+sudo mkdir -p /city_trees
+sudo chown -R devops:devops /city_trees
 
 # Install app systemd service
 sudo cp -f ./provision/city-trees.service /etc/systemd/system/city-trees.service
