@@ -15,7 +15,6 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 
 Below plugins will be used 
 - [erlang](https://github.com/asdf-vm/asdf-erlang)
-- [postgres](https://github.com/smashedtoatoms/asdf-postgres)
 - [elixir](https://github.com/asdf-vm/asdf-elixir)
 - [nodejs](https://github.com/asdf-vm/asdf-nodejs)
 
@@ -25,7 +24,6 @@ Install asdf plugins
 asdf plugin add erlang
 asdf plugin add elixir
 asdf plugin add nodejs
-asdf plugin-add postgres
 asdf plugin-add terraform
 ```
 
@@ -36,7 +34,7 @@ source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
 ```
 
-### Install pg build dependacies and pheonix
+### Install pg build dependencies and phoenix
 
 ```bash
 sudo apt-get install linux-headers-$(uname -r) 
@@ -59,16 +57,13 @@ asdf global elixir 1.13.4-otp-25
 asdf install nodejs 18.4.0
 asdf global nodejs 18.4.0
 
-asdf install postgres 14.2
-asdf global postgres 14.2
-
 asdf install terraform 1.1.7
 asdf global terraform 1.1.7
 
 asdf install
 ```
 
-### Verify instalation by running:
+### Verify installation by running:
 
 Before verification, open new shell to source asdf.
 
@@ -76,32 +71,25 @@ Before verification, open new shell to source asdf.
 node --version
 iex --version
 elixir --version
-pg_ctl --version
 ```
 
 ## Setup PostgresSQL
 
-When postgres is installed via asdf, database would run under current user
+On ubuntu linux use below to install and configure postgres
 
-### Start postgres server
+```bash
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get -y update
+sudo apt-get -y install postgresql-14
+sudo apt-get install postgis postgresql-14-postgis-3
 
-```
-~/.asdf/installs/postgres/14.2/bin/pg_ctl -D ~/.asdf/installs/postgres/14.2/data -l pg.log start
-```
-
-### Create database for local dev
-
-```
-createdb city_trees
-psql -l
-
-```
-### Create database user
-
-```
-psql -d city_trees
-create user city_trees with encrypted password 'city_trees';
-grant all privileges on database city_trees to city_trees;
+sudo -u postgres psql << EOF
+  CREATE EXTENSION postgis;
+  CREATE DATABASE city_trees;
+  CREATE USER city_trees WITH ENCRYPTED PASSWORD 'city_trees';
+  GRANT ALL PRIVILEGES ON DATABASE city_trees TO city_trees;
+EOF
 ```
 
 ## Install vscode plugins

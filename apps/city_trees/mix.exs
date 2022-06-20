@@ -40,6 +40,8 @@ defmodule CityTrees.MixProject do
       {:phoenix_pubsub, "~> 2.1"},
       {:ecto_sql, "~> 3.8"},
       {:postgrex, ">= 0.16.3"},
+      {:geo, "~> 3.4"},
+      {:geo_postgis, "~> 3.4"},
       {:jason, "~> 1.3"},
       {:swoosh, "~> 1.7"},
       {:gen_smtp, "~> 1.2"}

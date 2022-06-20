@@ -75,6 +75,7 @@ jobs:
           echo 'PORT=2096' >> /city_trees/current/.env
           echo 'DATABASE_URL=${{ secrets.DATABASE_URL_DEV }}' >>  /city_trees/current/.env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_DEV }}' >> /city_trees/current/.env
+          echo 'FASTMAIL_PASSWORD=${{ secrets.SECRET_FASTMAIL_PASSWORD }}' >> /city_trees/current/.env
         "
 
     - name: Restart service remove old versions

@@ -11,7 +11,8 @@ ExecStop=/city_trees/current/prod/rel/server/bin/server stop
 EnvironmentFile=/city_trees/current/.env
 Restart=always
 DynamicUser=yes
-ProtectHome=true
+# TODO switch to true
+ProtectHome=false
 RemainAfterExit=yes
 NoNewPrivileges=yes
 PrivateTmp=yes
