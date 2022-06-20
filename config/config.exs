@@ -42,12 +42,14 @@ config :esbuild,
   default: [
     args:
       ~w(
-        js/app.js
+        global=assets/js/app.js app=lib/city_trees_web/web.ts
         --bundle
-        --target=es2020
-        --outdir=../priv/static/assets --external:/fonts/* --external:/images/*
+        --sourcemap=external
+        --target=esnext
+        --outdir=./priv/static/assets
+        --external:/fonts/* --external:/images/*
       ),
-    cd: Path.expand("../apps/city_trees_web/assets", __DIR__),
+    cd: Path.expand("../apps/city_trees_web", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 

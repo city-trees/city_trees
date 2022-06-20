@@ -18,10 +18,17 @@
       defer 
       phx-track-static 
       type="text/javascript" 
+      src={Routes.static_path(@conn, "/assets/global.js")}>
+    </script>
+    <script 
+      defer 
+      phx-track-static 
+      type="text/javascript" 
       src={Routes.static_path(@conn, "/assets/app.js")}>
     </script>
+    
   </head>
-  <body class="h-full">
+  <body class="h-full w-full">
     <%= @inner_content %>
   </body>
 </html>

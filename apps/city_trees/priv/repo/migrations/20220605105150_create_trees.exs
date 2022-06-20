@@ -3,10 +3,10 @@ defmodule CityTrees.Repo.Migrations.CreateTrees do
 
   def change do
     create table(:trees) do
-      add :spiecies, :integer
+      add :spiecies_id, :integer
       add :diameter_low, :integer
       add :diameter_high, :integer
-
+      add :description, :string
       timestamps()
     end
   end
