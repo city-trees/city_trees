@@ -14,5 +14,7 @@ sudo chown -R devops:devops /city-trees
 # Install app systemd service
 sudo cp -f ./provision/city-trees.service /etc/systemd/system/city-trees.service
 sudo systemctl daemon-reload
-sudo systemctl start city-trees.service
-sudo systemctl enable city-trees.service
+
+# First time it might faile without deploy
+sudo systemctl enable city-trees.service || true
+sudo systemctl start city-trees.service || true
