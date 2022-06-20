@@ -29,10 +29,25 @@ server_apps = [
   },
 ]
 ```
+Prod:
+
+```
+server_apps = [
+  {
+    "floating_ip" = "195.201.250.214"
+    "id" = "20522699"
+    "internal_ip" = "167.235.57.53"
+    "labels" = tomap({
+      "env" = "prod"
+      "project" = "city_trees"
+    })
+  },
+]
+
+```
 
 To get server fingerprints we can use `ssh-keyscan`
 
 ```sh
-ssh-keyscan -p 2211 -t ed25519 167.235.57.53
-
+ssh-keyscan -p 2211 -t ed25519 195.201.250.214
 ```
