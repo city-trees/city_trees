@@ -50,14 +50,14 @@ sudo apt-get install inotify-tools
 ```bash
 export KERL_CONFIGURE_OPTIONS="--without-javac --without-wx"
 
-asdf install erlang 24.2.1
-asdf global erlang 24.2.1
+asdf install erlang 25.0.1
+asdf global erlang 25.0.1
 
-asdf install elixir 1.13.3-otp-24
-asdf global elixir 1.13.3-otp-24
+asdf install elixir 1.13.4-otp-25
+asdf global elixir 1.13.4-otp-25
 
-asdf install nodejs 16.14.0
-asdf global nodejs 16.14.0
+asdf install nodejs 18.4.0
+asdf global nodejs 18.4.0
 
 asdf install postgres 14.2
 asdf global postgres 14.2
