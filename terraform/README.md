@@ -49,5 +49,5 @@ server_apps = [
 To get server fingerprints we can use `ssh-keyscan`
 
 ```sh
-ssh-keyscan -p 2211 -t ed25519 195.201.250.214
+ssh-keyscan -p 2211 -t ed25519 195.201.250.204
 ```
