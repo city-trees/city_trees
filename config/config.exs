@@ -32,7 +32,12 @@ config :city_trees_web,
 # Configures the endpoint
 config :city_trees_web, CityTreesWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: CityTreesWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    view: CityTreesWeb.ErrorView,
+    accepts: ~w(html json),
+    layout: false,
+    root_layout: {CityTreesWeb.LayoutView, :root}
+  ],
   pubsub_server: CityTrees.PubSub,
   live_view: [signing_salt: "NiTFWfwc"]
 

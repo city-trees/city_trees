@@ -55,6 +55,12 @@ config :city_trees_web, CityTreesWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :city_trees_web, CityTreesWeb.Endpoint,
+  # debug_errors: false,
+  # render_errors: [
+  #   accepts: ~w(html json),
+  #   root_layout: {CityTreesWeb.LayoutView, :root},
+  #   view: CityTreesWeb.ErrorView,
+  # ],
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
