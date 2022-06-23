@@ -31,7 +31,8 @@ if config_env() == :prod do
   config :city_trees, CityTrees.Repo,
     url: database_url,
     socket_options: [:inet6],
-    pool_size: 10
+    pool_size: 10,
+    types: CityTrees.PostgresTypes
 
   config :city_trees_web, CityTreesWeb.Endpoint,
     http: [

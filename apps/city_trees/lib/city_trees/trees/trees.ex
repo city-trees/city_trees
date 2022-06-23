@@ -50,6 +50,12 @@ defmodule CityTrees.Trees do
 
   """
   def create_tree(attrs \\ %{}) do
+    {long, ""} = Float.parse(attrs["longitude"]);
+    {lat, ""} = Float.parse(attrs["latitude"]);
+
+    location = %Geo.Point{coordinates: {long, lat}, srid: 3857}
+    attrs = Map.put_new(attrs, "location", location)
+
     %Tree{}
     |> Tree.changeset(attrs)
     |> Repo.insert()

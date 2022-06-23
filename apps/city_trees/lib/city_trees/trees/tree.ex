@@ -5,15 +5,16 @@ defmodule CityTrees.Trees.Tree do
   schema "trees" do
     field :diameter_high, :integer
     field :diameter_low, :integer
-    field :spiecies_id, :integer
+    field :species_id, :integer
     field :description, :string
+    field :location, Geo.PostGIS.Geometry
     timestamps()
   end
 
   @doc false
   def changeset(tree, attrs) do
     tree
-    |> cast(attrs, [:spiecies_id, :diameter_low, :diameter_high])
-    |> validate_required([:spiecies_id, :diameter_low, :diameter_high])
+    |> cast(attrs, [:species_id, :diameter_low, :diameter_high, :location])
+    |> validate_required([:species_id, :diameter_low, :diameter_high, :location])
   end
 end

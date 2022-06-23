@@ -12,10 +12,13 @@ sudo apt-get -y install postgresql-14
 sudo apt-get install postgis postgresql-14-postgis-3
 
 sudo -u postgres psql << EOF
-  CREATE EXTENSION postgis;
   CREATE DATABASE city_trees;
   CREATE USER city_trees WITH ENCRYPTED PASSWORD 'city_trees';
   GRANT ALL PRIVILEGES ON DATABASE city_trees TO city_trees;
+EOF
+
+sudo -u postgres psql city_trees << EOF
+  CREATE EXTENSION postgis;
 EOF
 
 # Configure backup service
