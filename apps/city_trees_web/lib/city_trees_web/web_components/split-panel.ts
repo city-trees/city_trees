@@ -4,6 +4,12 @@ class WcSplitPanel extends HTMLElement {
   #direction = "row";
   #isResizing = false;
 
+  top: number;
+  left: number;
+  dom: {
+    median: HTMLDivElement
+  }
+
   constructor() {
       super();
       this.bind(this);
