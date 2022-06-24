@@ -2,24 +2,12 @@
   module={CityTreesWeb.DashboardLive.DashboardLayout} 
   id="dashboard_layout"
 >
-  <%= if @live_action in [:new, :edit] do %>
-    <.modal return_to={Routes.tree_index_path(@socket, :index)}>
-      <.live_component
-        module={CityTreesWeb.TreeLive.TreeForm}
-        id={@tree.id || :new}
-        title={@page_title}
-        action={@live_action}
-        tree={@tree}
-        return_to={Routes.tree_index_path(@socket, :index)}
-      />
-    </.modal>
-  <% end %>
-
   <split-panel direction="row">
     <div slot="1">
       <.live_component 
         module={CityTreesWeb.MapLive.MapboxMap} 
         id="mapbnox_map"
+        sticky
       />
     </div>
 
@@ -81,6 +69,19 @@
       </div>
     </div>
   </split-panel>
+
+  <%= if @live_action in [:new, :edit] do %>
+    <.modal return_to={Routes.tree_index_path(@socket, :index)}>
+      <.live_component
+        module={CityTreesWeb.TreeLive.TreeForm}
+        id={@tree.id || :new}
+        title={@page_title}
+        action={@live_action}
+        tree={@tree}
+        return_to={Routes.tree_index_path(@socket, :index)}
+      />
+    </.modal>
+  <% end %>
 </.live_component>
 
 

@@ -2,6 +2,7 @@ defmodule CityTrees.Trees.Tree do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:location]}
   schema "trees" do
     field :diameter_high, :integer
     field :diameter_low, :integer

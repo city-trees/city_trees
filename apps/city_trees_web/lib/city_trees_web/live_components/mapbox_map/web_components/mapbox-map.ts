@@ -1,12 +1,38 @@
-import { Map, GeolocateControl } from 'mapbox-gl'
+import { Map, GeolocateControl, GeoJSONSource } from 'mapbox-gl'
 
 // @see https://github.com/anneb/mapbox-wc
 class MapboxMap extends HTMLElement {
   map: Map
 
+
+  addTreeLayer() {
+    this.map.on('load', () => {
+      console.log('aded source')
+      this.map.addSource('earthquakes', {
+        type: 'geojson',
+        data: {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      });
+
+      this.map.addLayer({
+        'id': 'earthquakes-layer',
+        'type': 'circle',
+        'source': 'earthquakes',
+        'paint': {
+          'circle-radius': 8,
+          'circle-stroke-width': 2,
+          'circle-color': 'red',
+          'circle-stroke-color': 'white'
+        }
+      });
+    });
+  }
+
   connectedCallback() {
     this.render();
-
+    console.log('connected')
     const container = this.shadowRoot.querySelector('#map-container') as HTMLDivElement;
 
     this.map = new Map({
@@ -27,6 +53,8 @@ class MapboxMap extends HTMLElement {
       })
     );
 
+    this.addTreeLayer()
+
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
         if (entry.contentBoxSize) {
@@ -36,6 +64,25 @@ class MapboxMap extends HTMLElement {
     });
     resizeObserver.observe(container);
 
+    window.addEventListener('phx:trees', ({ detail }: any) => {
+      setTimeout(() => {
+        (this.map.getSource('earthquakes') as GeoJSONSource).setData({
+          "type": "FeatureCollection",
+          "features": detail.trees.map((tree) => {
+            return {
+              "type": "Feature",
+              "properties": {
+
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": tree.location.coordinates
+              }
+            }
+          })
+        })
+      }, 1000)
+    }, false)
   }
   render() {
     this.attachShadow({ mode: "open" });

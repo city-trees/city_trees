@@ -1,12 +1,19 @@
 defmodule CityTreesWeb.TreeLive.Index do
   use CityTreesWeb, :live_view
+  use Phoenix.LiveView
 
   alias CityTrees.Trees
   alias CityTrees.Trees.Tree
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :trees, list_trees())}
+    IO.puts("mounted")
+    trees = list_trees()
+    socket = socket
+      |> assign(:trees, trees)
+      |> push_event("trees", %{trees: trees})
+
+    {:ok, socket}
   end
 
   @impl true
