@@ -12,6 +12,7 @@ split-panel[direction=column]::part(median) {
   background: blue;
 }
 
+
 div[data-phx-main="true"]{
   width: 100%;
   height: 100%;
