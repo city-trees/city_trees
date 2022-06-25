@@ -7,7 +7,6 @@ class MapboxMap extends HTMLElement {
 
   addTreeLayer() {
     this.map.on('load', () => {
-      console.log('aded source')
       this.map.addSource('earthquakes', {
         type: 'geojson',
         data: {
@@ -30,9 +29,12 @@ class MapboxMap extends HTMLElement {
     });
   }
 
+  attachEvents = () => {
+
+  }
+
   connectedCallback() {
     this.render();
-    console.log('connected')
     const container = this.shadowRoot.querySelector('#map-container') as HTMLDivElement;
 
     this.map = new Map({
@@ -55,6 +57,7 @@ class MapboxMap extends HTMLElement {
 
     this.addTreeLayer()
 
+    //TODO added debounce
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
         if (entry.contentBoxSize) {
