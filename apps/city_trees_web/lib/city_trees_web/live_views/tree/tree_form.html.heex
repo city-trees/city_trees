@@ -16,9 +16,11 @@
     <TailwindForm.number_input field={:diameter_high} form={f} label="Diameter high" />
     <TailwindForm.text_input field={:description} form={f} label="Description" />
 
-    <TailwindForm.number_input field={:longitude} form={f} label="Longitude" />
-    <TailwindForm.number_input field={:latitude} form={f} label="Latitude" />
-
+    <geolocation-inputs>
+      <TailwindForm.number_input slot="longitude" field={:longitude} form={f} label="Longitude" />
+      <TailwindForm.number_input slot="latitude" field={:latitude} form={f} label="Latitude" />
+    </geolocation-inputs>
+    
     <TailwindButton.primary type="submit" size={:medium}>Save</TailwindButton.primary>  
   </.form>
 </div>

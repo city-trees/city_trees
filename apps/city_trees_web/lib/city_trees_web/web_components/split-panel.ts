@@ -1,11 +1,11 @@
 
-import { LitElement, css, html } from 'lit';
+import { renderShadow } from '../utils/element';
 import { emitter, EventName } from '../utils/event';
 import { debounce } from '../utils/lodash';
 
 const medianWidth = 10
 
-export class SplitPanel extends LitElement {
+export class SplitPanel extends HTMLElement {
   #isResizing = false;
   isMobileView: boolean | null = null;
   visiblePanel:  "map" | "content" = "map"
@@ -30,9 +30,9 @@ export class SplitPanel extends LitElement {
   }
 
   cacheDom = () => {
-    this.median = this.renderRoot.querySelector('#median')!;
-    this.mapPanel = this.renderRoot.querySelector('#map-panel')!
-    this.contentPanel = this.renderRoot.querySelector('#content-panel')!
+    this.median = this.shadowRoot!.querySelector('#median')!;
+    this.mapPanel = this.querySelector('[slot="map-panel"]')!
+    this.contentPanel = this.querySelector('[slot="content-panel"]')!
   }
 
   updateRec = () => {
@@ -40,7 +40,6 @@ export class SplitPanel extends LitElement {
   }
 
   switchToMobile = () => {
-    console.log('switch mobile')
     this.isMobileView = true;
     this.style.gridTemplateColumns = `100% 0px 100%`;
     this.style.overflowX = 'hidden';
@@ -55,6 +54,8 @@ export class SplitPanel extends LitElement {
     this.isMobileView = false;
     this.style.gridTemplateColumns = '1fr max-content 1fr';
     this.style.overflowX = 'auto'
+    this.mapPanel.style.transform = `none`
+    this.contentPanel.style.transform = `none`
 
     emitter.emit(EventName.SplitPanelSwitchMobile, {
       panel: this.visiblePanel,
@@ -96,10 +97,14 @@ export class SplitPanel extends LitElement {
   }
 
   handleMobileNav = (panel: "content" | "map") => {
-    console.log(panel, this.mapPanel)
     if(panel === 'content') {
-      this.mapPanel.style.transform = `translate(-1000px)`
-      this.contentPanel.style.transform = `translate(-1000px)`
+      this.visiblePanel = "content"
+      this.mapPanel.style.transform = `translate(-100%)`
+      this.contentPanel.style.transform = `translate(-100%)`
+    } else {
+      this.visiblePanel = "map"
+      this.mapPanel.style.transform = `none`
+      this.contentPanel.style.transform = `none`
     }
   }
   attachLocalEvents =  () => {
@@ -115,7 +120,8 @@ export class SplitPanel extends LitElement {
     emitter.removeListener(EventName.SplitPanelSwitchPanel, this.handleMobileNav)
   }
 
-  firstUpdated() {
+  connectedCallback() {
+    this.render();
     this.cacheDom()
     this.attachEvents();
     this.attachLocalEvents()
@@ -124,11 +130,10 @@ export class SplitPanel extends LitElement {
   }
 
   disconnectedCallback(): void {
-    super.disconnectedCallback();
     this.disconnectEvents();
   }
 
-  static styles = css` 
+  static styles = ` 
     :host { 
       display: grid;
       min-height: 100%;
@@ -167,12 +172,14 @@ export class SplitPanel extends LitElement {
     ::slotted(*) { overflow: auto; }
   `;
 
+  static html = `
+    <slot id="map-panel" name="map-panel"></slot>
+    <div id="median" part="median"></div>
+    <slot id="content-panel" name="content-panel"></slot>
+  `
+
   render() {
-    return html`
-      <slot id="map-panel" name="map-panel"></slot>
-      <div id="median" part="median"></div>
-      <slot id="content-panel" name="content-panel"></slot>
-    `;
+    renderShadow(this, SplitPanel.html, SplitPanel.styles)
   }
 }
 

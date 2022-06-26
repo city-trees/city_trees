@@ -59,9 +59,10 @@ defmodule TailwindForm do
       assigns
       |> assign_new(:field, fn -> :password end)
       |> assign_new(:label, fn -> "Number" end)
+      |> assign_new(:slot, fn -> nil end)
 
     ~H"""
-    <div class="space-y-1">
+    <div class="space-y-1" slot={assigns.slot}>
       <%= Form.label(
         assigns.form,
         assigns.field,

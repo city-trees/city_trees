@@ -48,10 +48,7 @@ class EventEmitter<EventMap extends EmitterEventMap> {
 
     return this;
   }
-
-  /**
-   * Get Handlers for event
-   */
+  
   private getHandlers<E extends keyof EventMap>(name: E): Set<EventHandler> | undefined {
     return this.listeners.get(name);
   }

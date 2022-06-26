@@ -1,39 +1,45 @@
-import { css, html, LitElement } from "lit";
+import { renderShadow } from "../../../utils/element";
 import { emitter, EventName } from "../../../utils/event";
 
 
-class MobileNavSplitPanel extends LitElement {
+class MobileNavSplitPanel extends HTMLElement {
   mapIcon: HTMLElement | null = null;
   tableIcon: HTMLElement | null = null;
 
-  static styles = css` 
-    #map-icon-slot {
-      display: none;
-    }
-    #table-icon-slot {
-      display: none;
-    }
-  `
+  switchMap = () => {
+    console.log(this.tableIcon)
+    this.mapIcon!.style.display = 'none'
+    this.tableIcon!.style.display = 'block'
+  }
+
+  switchContent = () => {
+    this.mapIcon!.style.display = 'block'
+    this.tableIcon!.style.display = 'none'
+  }
 
   handleSplitPanelMobile = ({mode, panel}: {mode: string, panel: string}) => {
+    console.log(panel)
     if (panel === "map") {
-      this.mapIcon!.style.display = 'none'
-      this.tableIcon!.style.display = 'visible'
+      this.switchMap()
+    } else {
+      this.switchContent()
     }
   }
 
   cacheDom = () => {
-    this.mapIcon = this.renderRoot.querySelector('#map-icon');
-    this.tableIcon = this.renderRoot.querySelector('#table-icon');
+    this.mapIcon = this.shadowRoot!.querySelector('#map-icon');
+    this.tableIcon = this.shadowRoot!.querySelector('#table-icon');
   }
 
   attachLocalEvents() {
     this.tableIcon?.addEventListener('click', (e) => {
       e.stopPropagation();
+      this.switchContent()
       emitter.emit(EventName.SplitPanelSwitchPanel, "content")
     })
     this.mapIcon?.addEventListener('click', (e) => {
       e.stopPropagation();
+      this.switchMap()
       emitter.emit(EventName.SplitPanelSwitchPanel, "map")
     })
   }
@@ -46,21 +52,31 @@ class MobileNavSplitPanel extends LitElement {
     emitter.removeListener(EventName.SplitPanelSwitchMobile, this.handleSplitPanelMobile)
   }
 
-  firstUpdated() {
+  connectedCallback() {
+    this.render()
     this.cacheDom()
     this.attachEvents()
     this.attachLocalEvents()
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     this.disconnectEvents();
   }
 
   render() {
-    return html`
+    renderShadow(this, 
+      `
       <slot id="map-icon" name="map-icon"></slot>
       <slot id="table-icon" name="table-icon"></slot>
-    `;
+    `,
+    `
+      #map-icon {
+        display: none;
+      }
+      #table-icon {
+        display: none;
+      }
+    `);
   }
 }
 customElements.define('mobile-nav-split-panel', MobileNavSplitPanel)
