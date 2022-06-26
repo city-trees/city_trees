@@ -1,20 +1,19 @@
 
 import { LitElement, css, html } from 'lit';
+import { emitter, EventName } from '../utils/event';
 import { debounce } from '../utils/lodash';
 
 const medianWidth = 10
 
-export type SplitPanelMobile = CustomEvent<{
-  visiblePanel: 'map' | 'table'
-}>
-
 export class SplitPanel extends LitElement {
   #isResizing = false;
   isMobileView: boolean | null = null;
-  visiblePanel:  "map" | "table" = "map"
+  visiblePanel:  "map" | "content" = "map"
 
   rec: DOMRect | null = null;
   median!: HTMLDivElement
+  mapPanel!: HTMLDivElement
+  contentPanel!: HTMLDivElement
 
   set isResizing(value) {
     this.#isResizing = value;
@@ -32,6 +31,8 @@ export class SplitPanel extends LitElement {
 
   cacheDom = () => {
     this.median = this.renderRoot.querySelector('#median')!;
+    this.mapPanel = this.renderRoot.querySelector('#map-panel')!
+    this.contentPanel = this.renderRoot.querySelector('#content-panel')!
   }
 
   updateRec = () => {
@@ -43,24 +44,22 @@ export class SplitPanel extends LitElement {
     this.isMobileView = true;
     this.style.gridTemplateColumns = `100% 0px 100%`;
     this.style.overflowX = 'hidden';
-    const event: SplitPanelMobile = new CustomEvent('split-panel-mobile', {
-      detail: { visiblePanel: this.visiblePanel },
-      composed: true,
-      bubbles: true,
+
+    emitter.emit(EventName.SplitPanelSwitchMobile, {
+      panel: this.visiblePanel,
+      mode: 'mobile'
     })
-    this.dispatchEvent(event);
   }
 
   switchDesktop = () => {
     this.isMobileView = false;
     this.style.gridTemplateColumns = '1fr max-content 1fr';
     this.style.overflowX = 'auto'
-    const event: SplitPanelMobile = new CustomEvent('split-panel-mobile', {
-      detail: { visiblePanel: this.visiblePanel },
-      composed: true,
-      bubbles: true,
+
+    emitter.emit(EventName.SplitPanelSwitchMobile, {
+      panel: this.visiblePanel,
+      mode: 'desktop'
     })
-    this.dispatchEvent(event);
   }
 
   handleResolution = () => {
@@ -95,19 +94,31 @@ export class SplitPanel extends LitElement {
     const newMedianLeft = e.clientX - this.rec!.left;
     this.style.gridTemplateColumns = `calc(${newMedianLeft}px - ${medianWidth / 2}px) ${medianWidth}px 1fr`;
   }
-  
-  attachEvents = () => {
-    window.addEventListener('resize', this.resize)
+
+  handleMobileNav = (panel: "content" | "map") => {
+    console.log(panel, this.mapPanel)
+    if(panel === 'content') {
+      this.mapPanel.style.transform = `translate(-1000px)`
+      this.contentPanel.style.transform = `translate(-1000px)`
+    }
+  }
+  attachLocalEvents =  () => {
     this.median.addEventListener("pointerdown", this.handlePointerdown);
+  }
+  attachEvents = () => {
+    window.addEventListener('resize', this.resize);
+    emitter.addEventListener(EventName.SplitPanelSwitchPanel, this.handleMobileNav)
   }
   
   disconnectEvents = () => {
-    window.removeEventListener('resize', this.resize)
+    window.removeEventListener('resize', this.resize);
+    emitter.removeListener(EventName.SplitPanelSwitchPanel, this.handleMobileNav)
   }
 
   firstUpdated() {
     this.cacheDom()
     this.attachEvents();
+    this.attachLocalEvents()
     this.updateRec();
     this.handleResolution();
   }
@@ -140,10 +151,10 @@ export class SplitPanel extends LitElement {
     :host #median:hover { 
       cursor: col-resize; 
     }
-    :host #slot1 { 
+    :host #map-panel { 
       grid-column: 1 / 2; grid-row: 1 / 1; 
     }
-    :host #slot2 { 
+    :host #content-panel { 
       grid-column: 3 / 4; grid-row: 1 / 1; 
     }
     :host([resizing][direction=col]){ cursor: row-resize; }
@@ -158,9 +169,9 @@ export class SplitPanel extends LitElement {
 
   render() {
     return html`
-      <slot id="slot1" name="1"></slot>
+      <slot id="map-panel" name="map-panel"></slot>
       <div id="median" part="median"></div>
-      <slot id="slot2" name="2"></slot>
+      <slot id="content-panel" name="content-panel"></slot>
     `;
   }
 }

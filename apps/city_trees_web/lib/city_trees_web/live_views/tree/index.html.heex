@@ -3,14 +3,14 @@
   id="dashboard_layout"
 >
   <split-panel>
-    <div slot="1">
+    <div slot="map-panel">
       <.live_component 
         module={CityTreesWeb.MapLive.MapboxMap} 
         id="mapbnox_map"
       />
     </div>
 
-    <div slot="2">
+    <div slot="content-panel">
       <.live_component 
         module={CityTreesWeb.TreeLive.TreeList} 
         id="tree_list"

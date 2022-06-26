@@ -3,18 +3,27 @@
     <div>
       <BrandStyle.logo />
     </div>
-    <div>
-      <mobile-nav-split-panel>
-        <div slot="map-icon">
+    <mobile-nav-split-panel>
+      <div slot="map-icon">
+        <button 
+          type="button" 
+          class="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900"
+        > 
           <HeroiconOutline.map />
-        </div>
+        </button>
+      </div>
 
-        <div slot="table-icon">
-          <HeroiconOutline.table />
-        </div>
-      </mobile-nav-split-panel>
-    </div>
+      <div slot="table-icon">
+        <button 
+          type="button" 
+          class="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900"
+        >
+        <HeroiconOutline.table />
+        </button>
+      </div>
+    </mobile-nav-split-panel>
     <div>
+
       <mobile-nav-toggle
         type="button" 
         class="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900"

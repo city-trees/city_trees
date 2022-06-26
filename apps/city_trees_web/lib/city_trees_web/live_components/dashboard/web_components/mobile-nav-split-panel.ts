@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
-import { SplitPanelMobile } from "../../../web_components/split-panel";
+import { emitter, EventName } from "../../../utils/event";
+
 
 class MobileNavSplitPanel extends LitElement {
   mapIcon: HTMLElement | null = null;
@@ -14,31 +15,41 @@ class MobileNavSplitPanel extends LitElement {
     }
   `
 
-  handleSplitPanelMobile = (event: SplitPanelMobile) => {
-    event.stopPropagation()
-    console.log(event.detail)
-    if (event.detail.visiblePanel === "map") {
+  handleSplitPanelMobile = ({mode, panel}: {mode: string, panel: string}) => {
+    if (panel === "map") {
       this.mapIcon!.style.display = 'none'
       this.tableIcon!.style.display = 'visible'
     }
   }
 
   cacheDom = () => {
-    this.mapIcon = this.renderRoot.querySelector('#map-icon-slot');
-    this.tableIcon = this.renderRoot.querySelector('#table-icon-slot');
+    this.mapIcon = this.renderRoot.querySelector('#map-icon');
+    this.tableIcon = this.renderRoot.querySelector('#table-icon');
+  }
+
+  attachLocalEvents() {
+    this.tableIcon?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      emitter.emit(EventName.SplitPanelSwitchPanel, "content")
+    })
+    this.mapIcon?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      emitter.emit(EventName.SplitPanelSwitchPanel, "map")
+    })
   }
 
   attachEvents() {
-    document.addEventListener('split-panel-mobile', this.handleSplitPanelMobile as EventListener)
+    emitter.addEventListener(EventName.SplitPanelSwitchMobile, this.handleSplitPanelMobile)
   }
 
   disconnectEvents() {
-    document.removeEventListener('split-panel-mobile', this.handleSplitPanelMobile as EventListener)
+    emitter.removeListener(EventName.SplitPanelSwitchMobile, this.handleSplitPanelMobile)
   }
 
   firstUpdated() {
     this.cacheDom()
     this.attachEvents()
+    this.attachLocalEvents()
   }
 
   disconnectedCallback(): void {
@@ -47,8 +58,8 @@ class MobileNavSplitPanel extends LitElement {
 
   render() {
     return html`
-      <slot id="map-icon-slot" name="map-icon"></slot>
-      <slot id="table-icon-slot" name="table-icon"></slot>
+      <slot id="map-icon" name="map-icon"></slot>
+      <slot id="table-icon" name="table-icon"></slot>
     `;
   }
 }
