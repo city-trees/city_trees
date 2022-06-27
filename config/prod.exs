@@ -1,7 +1,7 @@
 import Config
 
 
-app_env = System.get_env("APP_ENV") || raise "APP_ENV not available"
+app_env = "dev"
 
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
