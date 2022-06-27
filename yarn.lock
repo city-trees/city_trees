@@ -10,7 +10,7 @@ __metadata:
   resolution: "@city-trees/city-trees-web@workspace:apps/city_trees_web"
   dependencies:
     "@types/mapbox-gl": ^2.7.3
-    mapbox-gl: ^2.9.0
+    mapbox-gl: ^2.9.1
   languageName: unknown
   linkType: soft
 
@@ -162,9 +162,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mapbox-gl@npm:^2.9.0":
-  version: 2.9.0
-  resolution: "mapbox-gl@npm:2.9.0"
+"mapbox-gl@npm:^2.9.1":
+  version: 2.9.1
+  resolution: "mapbox-gl@npm:2.9.1"
   dependencies:
     "@mapbox/geojson-rewind": ^0.5.1
     "@mapbox/geojson-types": ^1.0.2
@@ -188,7 +188,7 @@ __metadata:
     supercluster: ^7.1.4
     tinyqueue: ^2.0.3
     vt-pbf: ^3.1.3
-  checksum: cbca042b587c39d3f78859987d18b253a6d6734b89aad7a8db04120da8f402a5882ea4566c0751690b179760686c0aea8bac4e4c746a98f0bdd0661aa98aaa0f
+  checksum: afd9459cc3a93d969713e75234c2ddf63de206e552239dff309c6e69f7f574fb028f5ffe9aabebe5956e890fffc31a696f4caa517e805673a5d32b69abd70218
   languageName: node
   linkType: hard
 
