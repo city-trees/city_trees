@@ -1,5 +1,8 @@
 import Config
 
+
+app_env = System.get_env("APP_ENV") || raise "APP_ENV not available"
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.
@@ -10,7 +13,10 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :city_trees_web, CityTreesWeb.Endpoint,
-  url: [host: "citytrees.eu", port: 2096],
+  url: [
+    host: if app_env == "dev", do: "dev.citytrees.eu", else: "citytrees.eu" ,
+    port: 2096
+  ],
   check_origin: ["http://dev.citytrees.eu:2096"]
   cache_static_manifest: "priv/static/cache_manifest.json"
 

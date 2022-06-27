@@ -70,6 +70,7 @@ jobs:
           ln -sfn ${DEPLOY_PATH} /city_trees/current
 
           cat /dev/null > /city_trees/current/.env
+          echo 'APP_ENV=prod' >> /city_trees/current/.env
           echo 'PORT=2096' >> /city_trees/current/.env
           echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /city_trees/current/.env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /city_trees/current/.env
