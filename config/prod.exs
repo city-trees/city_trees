@@ -10,7 +10,8 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :city_trees_web, CityTreesWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "citytrees.eu", port: 2096],
+  check_origin: ["http://dev.citytrees.eu:2096"]
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # ## SSL Support
