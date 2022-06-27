@@ -7,7 +7,6 @@ class MobileNavSplitPanel extends HTMLElement {
   tableIcon: HTMLElement | null = null;
 
   switchMap = () => {
-    console.log(this.tableIcon)
     this.mapIcon!.style.display = 'none'
     this.tableIcon!.style.display = 'block'
   }
@@ -18,7 +17,6 @@ class MobileNavSplitPanel extends HTMLElement {
   }
 
   handleSplitPanelMobile = ({mode, panel}: {mode: string, panel: string}) => {
-    console.log(panel)
     if (panel === "map") {
       this.switchMap()
     } else {

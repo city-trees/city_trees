@@ -40,7 +40,7 @@
                   </td>
           
                   <td>
-                    <span><%= live_redirect "Show", to: Routes.tree_show_path(@socket, :show, tree) %></span>
+                    <span><%= live_patch "Show", to: Routes.tree_show_path(@socket, :show, tree) %></span>
                     <span><%= live_patch "Edit", to: Routes.tree_index_path(@socket, :edit, tree) %></span>
                     <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: tree.id, data: [confirm: "Are you sure?"] %></span>
                   </td>

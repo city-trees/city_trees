@@ -7,7 +7,6 @@ defmodule CityTreesWeb.TreeLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    IO.puts("mounted")
     trees = list_trees()
     socket = socket
       |> assign(:trees, trees)

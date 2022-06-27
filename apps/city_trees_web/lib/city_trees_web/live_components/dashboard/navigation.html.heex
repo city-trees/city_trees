@@ -5,8 +5,13 @@
   
   <nav class="mt-5 flex-1" aria-label="Sidebar">
     <div class="px-2 space-y-1">
-      <%= live_patch to: Routes.tree_index_path(@socket, :index), class: "bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
+      <%= live_patch to: Routes.home_index_path(@socket, :index), class: "bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
         <HeroiconOutline.home class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" />
+         Home
+      <% end %>
+      
+      <%= live_patch to: Routes.tree_index_path(@socket, :index), class: "bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
+        <HeroiconOutline.globe class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6" />
          Trees
       <% end %>
       

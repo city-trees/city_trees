@@ -5,6 +5,9 @@ import { debounce } from '../utils/lodash';
 
 const medianWidth = 10
 
+const mobileColumns = `100% 0px 100%` 
+const desktopColumns = '1fr max-content 1fr'
+
 export class SplitPanel extends HTMLElement {
   #isResizing = false;
   isMobileView: boolean | null = null;
@@ -41,7 +44,7 @@ export class SplitPanel extends HTMLElement {
 
   switchToMobile = () => {
     this.isMobileView = true;
-    this.style.gridTemplateColumns = `100% 0px 100%`;
+    this.style.gridTemplateColumns = mobileColumns;
     this.style.overflowX = 'hidden';
 
     emitter.emit(EventName.SplitPanelSwitchMobile, {
@@ -52,7 +55,7 @@ export class SplitPanel extends HTMLElement {
 
   switchDesktop = () => {
     this.isMobileView = false;
-    this.style.gridTemplateColumns = '1fr max-content 1fr';
+    this.style.gridTemplateColumns = desktopColumns;
     this.style.overflowX = 'auto'
     this.mapPanel.style.transform = `none`
     this.contentPanel.style.transform = `none`
@@ -64,15 +67,15 @@ export class SplitPanel extends HTMLElement {
   }
 
   handleResolution = () => {
-    if (this.isMobileView !== true && window.innerWidth < 1024) {
+    if (window.innerWidth < 1024 && this.style.gridTemplateColumns !== mobileColumns) {
       this.switchToMobile();
     }
-    if (this.isMobileView !== false && window.innerWidth > 1024) {
+    if (window.innerWidth > 1024 && this.style.gridTemplateColumns !== desktopColumns) {
       this.switchDesktop();
     }
   }
 
-  resize = debounce(() => {
+  handleWindowResize = debounce(() => {
     this.updateRec()
     this.handleResolution();
   }, 500)
@@ -110,14 +113,17 @@ export class SplitPanel extends HTMLElement {
   attachLocalEvents =  () => {
     this.median.addEventListener("pointerdown", this.handlePointerdown);
   }
+
   attachEvents = () => {
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.handleWindowResize);
     emitter.addEventListener(EventName.SplitPanelSwitchPanel, this.handleMobileNav)
+    window.addEventListener("phx:page-loading-stop", this.handleResolution)
   }
   
   disconnectEvents = () => {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.handleWindowResize);
     emitter.removeListener(EventName.SplitPanelSwitchPanel, this.handleMobileNav)
+    window.removeEventListener("phx:page-loading-stop", this.handleResolution)
   }
 
   connectedCallback() {
@@ -148,7 +154,7 @@ export class SplitPanel extends HTMLElement {
       cursor: col-resize; 
     }
     :host { 
-      grid-template-columns: 1fr max-content 1fr; 
+      grid-template-columns: ${desktopColumns}; 
     }
     :host #median { 
       inline-size: 0.5rem; grid-column: 2 / 3; 
