@@ -81,5 +81,6 @@ jobs:
     - name: Restart service remove old versions
       run: |
         ssh $SERVER_USER@server sudo systemctl restart city-trees.service
+        ssh $SERVER_USER@server /city_trees/current/prod/rel/server/bin/server "CityTreesWeb.Release.migrate"
         ssh $SERVER_USER@server ls -dt /city_trees/* | tail -n +11 | xargs rm -rf
-
+  
