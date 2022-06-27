@@ -1,9 +1,15 @@
 defmodule CityTreesWeb.Release do
+  require Logger
+
   @moduledoc """
   Used for executing DB release tasks when run in production without Mix
   installed.
   """
   @app :city_trees_web
+
+  def before_start do
+    Logger.info("Before start")
+  end
 
   def migrate do
     load_app()

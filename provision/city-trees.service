@@ -6,7 +6,10 @@ After=network.target
 WantedBy=multi-user.target
 
 [Service]
+ExecStartPre=/city_trees/current/prod/rel/server/bin/server eval "CityTreesWeb.Release.before_start"
 ExecStart=/city_trees/current/prod/rel/server/bin/server start
+ExecStartPost=/city_trees/current/prod/rel/server/bin/server eval "CityTreesWeb.Release.migrate"
+
 ExecStop=/city_trees/current/prod/rel/server/bin/server stop
 EnvironmentFile=/city_trees/current/.env
 Restart=always
