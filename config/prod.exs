@@ -14,7 +14,7 @@ app_env = System.get_env("APP_ENV") || raise "APP_ENV not available"
 # before starting your production server.
 config :city_trees_web, CityTreesWeb.Endpoint,
   url: [
-    host: if app_env == "dev", do: "dev.citytrees.eu", else: "citytrees.eu" ,
+    host: (if app_env == "dev" do "dev.citytrees.eu" else "citytrees.eu") ,
     port: 2096
   ],
   check_origin: ["http://dev.citytrees.eu:2096"]
