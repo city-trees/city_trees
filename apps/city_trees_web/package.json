@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "mapbox-gl": "^2.9.0"
+    "mapbox-gl": "^2.9.1"
   },
   "devDependencies": {
     "@types/mapbox-gl": "^2.7.3"
