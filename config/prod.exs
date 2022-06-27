@@ -17,7 +17,7 @@ config :city_trees_web, CityTreesWeb.Endpoint,
     host: (if app_env == "dev" do "dev.citytrees.eu" else "citytrees.eu" end) ,
     port: 2096
   ],
-  check_origin: ["http://dev.citytrees.eu:2096"]
+  check_origin: ["http://dev.citytrees.eu:2096"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # ## SSL Support
