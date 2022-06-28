@@ -8,6 +8,9 @@ env:
   MIX_ENV: prod
   NODE_ENV: production
   SERVER_IP: 195.201.250.214
+  APP_ENV: dev
+  APP_SSL_CERT_PATH: /etc/city_trees/citytrees.cert
+  APP_SSL_KEY_PATH: /etc/city_trees/citytrees.key
   SERVER_PORT: 2211
   SERVER_USER: devops
   BUILD_DIR: .build/
@@ -70,9 +73,6 @@ jobs:
           ln -sfn ${DEPLOY_PATH} /city_trees/current
 
           cat /dev/null > /city_trees/current/.env
-          echo 'APP_ENV=prod' >> /city_trees/current/.env
-          echo 'APP_SSL_KEY_PATH=/city_trees/citytrees.key' >> /city_trees/current/.env
-          echo 'APP_SSL_CERT_PATH=/city_trees/citytrees.cert' >> /city_trees/current/.env
           echo 'DATABASE_URL=${{ secrets.DATABASE_URL_PROD }}' >>  /city_trees/current/.env
           echo 'SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE_PROD }}' >> /city_trees/current/.env
         "

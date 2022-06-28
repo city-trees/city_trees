@@ -8,13 +8,14 @@ set -o pipefail
 sudo ufw allow 443/tcp comment 'Open port app tcp port 443'
 sudo ufw allow 80/tcp comment 'Open port app tcp port 80'
 
+
 # Create folders for app
 sudo mkdir -p /city_trees
 sudo chown -R devops:devops /city_trees
 
 # TODO move into secrets
-cp ./provision/citytrees.cert /city_trees/citytrees.cert
-cp ./provision/citytrees.key /city_trees/citytrees.key
+sudo cp -f ./provision/citytrees.cert /etc/city_trees/citytrees.cert
+sudo cp -f ./provision/citytrees.key /etc/city_trees/citytrees.key
 
 # Install app systemd service
 sudo cp -f ./provision/city-trees.service /etc/systemd/system/city-trees.service

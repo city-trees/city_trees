@@ -36,7 +36,6 @@ config :city_trees_web, CityTreesWeb.Endpoint,
     cipher_suite: :strong,
     keyfile: System.get_env("APP_SSL_KEY_PATH"),
     certfile: System.get_env("APP_SSL_CERT_PATH"),
-
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 #
