@@ -25,7 +25,7 @@ import Config
 # to the previous section and set your `:url` port to 443:
 #
 config :city_trees_web, CityTreesWeb.Endpoint,
-  force_ssl: [hsts: true]
+  force_ssl: [hsts: true],
   url: [
     host: (if System.get_env("APP_ENV") == "dev" do "dev.citytrees.eu" else "citytrees.eu" end),
     port: 443
