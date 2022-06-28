@@ -9,10 +9,10 @@ WantedBy=multi-user.target
 ExecStartPre=/city_trees/current/prod/rel/server/bin/server eval "CityTreesWeb.Release.before_start"
 ExecStart=/city_trees/current/prod/rel/server/bin/server start
 ExecStartPost=/city_trees/current/prod/rel/server/bin/server eval "CityTreesWeb.Release.migrate"
-
 ExecStop=/city_trees/current/prod/rel/server/bin/server stop
 EnvironmentFile=/city_trees/current/.env
 AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 Restart=always
 DynamicUser=yes
 # TODO switch to true
