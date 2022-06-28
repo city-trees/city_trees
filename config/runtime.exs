@@ -37,7 +37,7 @@ if config_env() == :prod do
   config :city_trees_web, CityTreesWeb.Endpoint,
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: String.to_integer(System.get_env("PORT") || "4000")
+      port: String.to_integer(System.get_env("PORT") || "80")
     ],
     secret_key_base: secret_key_base,
     server: true
