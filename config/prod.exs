@@ -30,7 +30,7 @@ config :city_trees_web, CityTreesWeb.Endpoint,
     host: (if System.get_env("APP_ENV") == "dev" do "dev.citytrees.eu" else "citytrees.eu" end),
     port: 443
   ],
-  check_origin: ["http://dev.citytrees.eu", "http://citytrees.eu"],
+  check_origin: ["//dev.citytrees.eu", "//citytrees.eu"],
   https: [
     port: 443,
     cipher_suite: :strong,
