@@ -37,7 +37,7 @@ config :city_trees_web, CityTreesWeb.Endpoint,
     keyfile: System.get_env("APP_SSL_KEY_PATH"),
     certfile: System.get_env("APP_SSL_CERT_PATH"),
 
-  ]
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 #
 # The `cipher_suite` is set to `:strong` to support only the
