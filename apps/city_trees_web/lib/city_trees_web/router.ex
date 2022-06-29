@@ -43,13 +43,15 @@ defmodule CityTreesWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live "/", HomeLive.Index, :index
-    live "/trees", TreeLive.Index, :index
-    live "/trees/new", TreeLive.Index, :new
-    live "/trees/:id/edit", TreeLive.Index, :edit
+    live_session :quiz_maker, on_mount: CityTreesWeb.DashboardLive.DashboardLayout do
+      live "/", HomeLive.Index, :index
+      live "/trees", TreeLive.Index, :index
+      live "/trees/new", TreeLive.Index, :new
+      live "/trees/:id/edit", TreeLive.Index, :edit
 
-    live "/trees/:id", TreeLive.Show, :show
-    live "/trees/:id/show/edit", TreeLive.Show, :edit
+      live "/trees/:id", TreeLive.Show, :show
+      live "/trees/:id/show/edit", TreeLive.Show, :edit
+    end
   end
 
   scope "/", CityTreesWeb do
