@@ -83,7 +83,11 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-get -y update
 sudo apt-get -y install postgresql-14
 sudo apt-get install postgis postgresql-14-postgis-3
+```
 
+Create app database
+
+```bash
 sudo -u postgres psql << EOF
   CREATE DATABASE city_trees;
   CREATE USER city_trees WITH ENCRYPTED PASSWORD 'city_trees';
@@ -95,9 +99,23 @@ sudo -u postgres psql city_trees << EOF
 EOF
 ```
 
+Create test database
+
+```bash
+sudo -u postgres psql << EOF
+  CREATE DATABASE city_trees_test1;
+  CREATE USER city_trees_test WITH ENCRYPTED PASSWORD 'city_trees_test';
+  GRANT ALL PRIVILEGES ON DATABASE city_trees_test1 TO city_trees_test;
+EOF
+
+sudo -u postgres psql city_trees_test1 << EOF
+  CREATE EXTENSION postgis;
+EOF
+```
+
 ## Install vscode plugins
 
-- [Elixr LS](https://marketplace.visualstudio.com/items?itemName=JakeBecker.elixir-ls)
+- [Elixir LS](https://marketplace.visualstudio.com/items?itemName=JakeBecker.elixir-ls)
 - [Credo](https://marketplace.visualstudio.com/items?itemName=pantajoe.vscode-elixir-credo) 
 - [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [SpellCheck](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)

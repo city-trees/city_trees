@@ -11,9 +11,13 @@ defmodule CityTrees.TreesFixtures do
     {:ok, tree} =
       attrs
       |> Enum.into(%{
-        diameter_high: 42,
-        diameter_low: 42,
-        spiecies: 42
+        "latitude" => "20",
+        "longitude" => "10",
+        "diameter_high" => 42,
+        "diameter_low" => 42,
+        "species_id" => 42,
+        "description" => "some description",
+
       })
       |> CityTrees.Trees.create_tree()
 

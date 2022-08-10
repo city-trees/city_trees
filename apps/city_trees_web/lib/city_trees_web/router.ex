@@ -43,7 +43,7 @@ defmodule CityTreesWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live_session :quiz_maker, on_mount: CityTreesWeb.DashboardLive.DashboardLayout do
+    live_session :city_trees_dashboard, on_mount: CityTreesWeb.DashboardLive.DashboardLayout do
       live "/", HomeLive.Index, :index
       live "/trees", TreeLive.Index, :index
       live "/trees/new", TreeLive.Index, :new

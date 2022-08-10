@@ -9,10 +9,10 @@ config :bcrypt_elixir, :log_rounds, 1
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :city_trees, CityTrees.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "city_trees_test",
+  password: "city_trees_test",
   hostname: "localhost",
-  database: "city_trees_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "city_trees_test#{System.get_env("MIX_TEST_PARTITION") || "1"}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10,
   types: CityTrees.PostgresTypes
