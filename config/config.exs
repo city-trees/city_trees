@@ -41,6 +41,7 @@ config :city_trees_web, CityTreesWeb.Endpoint,
   pubsub_server: CityTrees.PubSub,
   live_view: [signing_salt: "NiTFWfwc"]
 
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.0",
