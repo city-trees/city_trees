@@ -50,7 +50,7 @@ defmodule CityTreesWeb.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.19"},
       {:city_trees, in_umbrella: true},
-      {:jason, "~> 1.3"},
+      {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.5"}
     ]
   end
