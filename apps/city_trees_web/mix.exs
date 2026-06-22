@@ -48,7 +48,7 @@ defmodule CityTreesWeb.MixProject do
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.19"},
+      {:gettext, "~> 0.26"},
       {:city_trees, in_umbrella: true},
       {:jason, "~> 1.3"},
       {:plug_cowboy, "~> 2.5"}
