@@ -43,7 +43,7 @@ defmodule CityTrees.MixProject do
       {:geo, "~> 3.4"},
       {:geo_postgis, "~> 3.4"},
       {:jason, "~> 1.3"},
-      {:swoosh, "~> 1.7"},
+      {:swoosh, "~> 1.28"},
       {:gen_smtp, "~> 1.2"}
     ]
   end
